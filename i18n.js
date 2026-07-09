@@ -31,9 +31,8 @@ window.I18N = {
     "cat.build": "agent와 도구 개발",
 
     /* home */
-    "home.intro.eyebrow": "KAIST SAIL — Mechanistic Interpretability",
     "home.intro.name": "박용욱",
-    "home.intro.role": "KAIST SAIL · LLM mechanistic interpretability 연구",
+    "home.intro.role": "LLM 연구",
     "home.intro.bio": "KAIST SAIL에서 LLM과 Transformer의 mechanistic interpretability를 연구합니다. 주로 attention head 단위에서 모델 내부 계산을 분석하고, 그 이해를 knowledge editing으로 검증하는 데 관심이 있습니다.",
     "home.interests.heading": "연구 관심사",
     "home.interests.item1": "Mechanistic interpretability — attention head와 circuit 단위의 내부 동작 분석 (knowledge editing으로 이해를 검증)",
@@ -155,9 +154,8 @@ window.I18N = {
     "cat.build": "Agents & tooling",
 
     /* home */
-    "home.intro.eyebrow": "KAIST SAIL — Mechanistic Interpretability",
     "home.intro.name": "Yonguk Park",
-    "home.intro.role": "KAIST SAIL · LLM mechanistic interpretability",
+    "home.intro.role": "LLM research",
     "home.intro.bio": "I research the mechanistic interpretability of LLMs and Transformers at KAIST SAIL. My work analyzes model internals at the level of individual attention heads, and probes that understanding through knowledge editing.",
     "home.interests.heading": "Research interests",
     "home.interests.item1": "Mechanistic interpretability — analyzing internal behavior at the attention-head and circuit level (validated through knowledge editing)",
