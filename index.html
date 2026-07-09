@@ -13,6 +13,7 @@ title: null
   <span class="corner bottom-right" aria-hidden="true"></span>
   <div class="cover-head">
     <div class="cover-head-text">
+      <p class="hero-eyebrow" data-i18n="home.intro.eyebrow">KAIST SAIL · LLM internals · tool-using agents</p>
       <h1 id="intro-name" data-word-reveal data-i18n="home.intro.name">Yonguk Park</h1>
       <p class="intro-role" data-i18n="home.intro.role">Researcher</p>
       <p class="intro-bio" data-i18n="home.intro.bio">Bio placeholder — content-author fills.</p>
@@ -22,10 +23,21 @@ title: null
         <a class="hero-link" href="https://github.com/{{ site.github }}" rel="me noopener" target="_blank" data-i18n="home.connect.github">GitHub</a>
       </div>
     </div>
-    <!-- 프로필 사진 자리. 실제 사진으로 바꾸려면 아래 div 내용을
-         <img class="avatar-img" src="{{ '/assets/profile.jpg' | relative_url }}" alt="박용욱 프로필 사진">
-         으로 교체하면 된다 (프레임/그림자는 .cover-avatar가 담당). -->
-    <div class="cover-avatar" aria-hidden="true"><span class="avatar-emoji">🧑‍💻</span></div>
+    <div class="cover-avatar" aria-hidden="true">
+      <div class="avatar-card">
+        <div class="avatar-topbar"><span></span><span></span><span></span></div>
+        <div class="avatar-main">
+          <p class="avatar-kicker" data-i18n="home.avatar.kicker">current thread</p>
+          <p class="avatar-title" data-i18n="home.avatar.title">How does a model arrive at an answer?</p>
+          <p class="avatar-note" data-i18n="home.avatar.note">A portfolio for interpretability notes, agent-building projects, and experiments that are small enough to inspect.</p>
+        </div>
+        <div class="avatar-metrics">
+          <span><strong data-i18n="home.avatar.metric1.value">SAIL</strong> <span data-i18n="home.avatar.metric1.label">KAIST</span></span>
+          <span><strong data-i18n="home.avatar.metric2.value">MCP</strong> <span data-i18n="home.avatar.metric2.label">agents</span></span>
+          <span><strong data-i18n="home.avatar.metric3.value">MI</strong> <span data-i18n="home.avatar.metric3.label">circuits</span></span>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="cover-grid">
@@ -54,79 +66,7 @@ title: null
   </div>
 </section>
 
-<!-- 2. CV 공간 (자소서 항목 스캐폴드): 실제 내용은 i18n.js의 cv.* 값만 바꾸면 된다.
-     블록(학력/연구 경력/수상/자격)이나 항목(li.cv-item)을 늘릴 땐 구조를 복제하고
-     cv.<블록>.<번호>.{period,title,desc} 키를 i18n.js ko/en 양쪽에 추가한다. -->
-<section class="home-cv reveal" aria-labelledby="cv-h">
-  <div class="section-label"><span class="section-label-text" data-i18n="label.cv">CV</span></div>
-  <h2 id="cv-h" data-i18n="home.cv.heading">CV</h2>
-  <div class="cv-grid">
-    <div class="cv-block">
-      <h3 class="cv-block-heading" data-i18n="cv.edu.heading">Education</h3>
-      <ul class="cv-items">
-        <li class="cv-item">
-          <span class="cv-period" data-i18n="cv.edu.1.period">TBD</span>
-          <div class="cv-body">
-            <p class="cv-title" data-i18n="cv.edu.1.title">TBD</p>
-            <p class="cv-desc" data-i18n="cv.edu.1.desc">TBD</p>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div class="cv-block">
-      <h3 class="cv-block-heading" data-i18n="cv.exp.heading">Research experience</h3>
-      <ul class="cv-items">
-        <li class="cv-item">
-          <span class="cv-period" data-i18n="cv.exp.1.period">TBD</span>
-          <div class="cv-body">
-            <p class="cv-title" data-i18n="cv.exp.1.title">TBD</p>
-            <p class="cv-desc" data-i18n="cv.exp.1.desc">TBD</p>
-          </div>
-        </li>
-        <li class="cv-item">
-          <span class="cv-period" data-i18n="cv.exp.2.period">TBD</span>
-          <div class="cv-body">
-            <p class="cv-title" data-i18n="cv.exp.2.title">TBD</p>
-            <p class="cv-desc" data-i18n="cv.exp.2.desc">TBD</p>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div class="cv-block">
-      <h3 class="cv-block-heading" data-i18n="cv.awards.heading">Awards</h3>
-      <ul class="cv-items">
-        <li class="cv-item">
-          <span class="cv-period" data-i18n="cv.awards.1.period">TBD</span>
-          <div class="cv-body">
-            <p class="cv-title" data-i18n="cv.awards.1.title">TBD</p>
-            <p class="cv-desc" data-i18n="cv.awards.1.desc">TBD</p>
-          </div>
-        </li>
-        <li class="cv-item">
-          <span class="cv-period" data-i18n="cv.awards.2.period">TBD</span>
-          <div class="cv-body">
-            <p class="cv-title" data-i18n="cv.awards.2.title">TBD</p>
-            <p class="cv-desc" data-i18n="cv.awards.2.desc">TBD</p>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div class="cv-block">
-      <h3 class="cv-block-heading" data-i18n="cv.certs.heading">Certifications &amp; more</h3>
-      <ul class="cv-items">
-        <li class="cv-item">
-          <span class="cv-period" data-i18n="cv.certs.1.period">TBD</span>
-          <div class="cv-body">
-            <p class="cv-title" data-i18n="cv.certs.1.title">TBD</p>
-            <p class="cv-desc" data-i18n="cv.certs.1.desc">TBD</p>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- 3. 대표 프로젝트 (요약 3개 미리보기 → 전체는 /projects/) -->
+<!-- 2. 대표 프로젝트 (요약 3개 미리보기 → 전체는 /projects/) -->
 <section class="home-projects reveal" aria-labelledby="projects-h">
   <div class="section-label"><span class="section-label-text" data-i18n="label.projects">Projects</span></div>
   <h2 id="projects-h" data-i18n="home.projects.heading">Representative projects</h2>
