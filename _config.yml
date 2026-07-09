@@ -1,0 +1,58 @@
+# === Site identity ===
+title: "Yonguk Park"
+description: "KAIST SAIL 연구자 Yonguk Park(박용욱)의 포트폴리오 · 기술 블로그. Mechanistic interpretability를 중심으로 한 연구와 기록."
+author: "Yonguk Park"
+email: "godpark123@gmail.com"
+github: "yongukpark"
+# 사이트 기본 언어 (jekyll-seo-tag가 og:locale/html lang 힌트로 사용). 한국어 기본.
+lang: ko
+
+# 공유 카드: 대형 트위터 카드 (jekyll-seo-tag가 twitter:card로 방출).
+twitter:
+  card: summary_large_image
+
+# === URL / baseurl (GitHub Pages) ===
+# username.github.io 저장소로 배포하면 baseurl은 빈 값("").
+# 프로젝트 페이지(github.com/user/repo)로 배포하면 baseurl은 "/repo"로 설정.
+# 모든 링크는 relative_url / posts-data의 relative_url 필터로 baseurl을 흡수한다.
+url: "https://yongukpark.github.io"
+baseurl: ""
+
+# === Build ===
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# 상세 페이지는 /blog/ 아래로 온다 (블로그 목록/맵 링크와 일관).
+permalink: /blog/:year/:month/:day/:title/
+
+# GitHub Pages 호환 화이트리스트 플러그인만 사용 (SEO/사이트맵/피드).
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+
+# 기본값
+defaults:
+  # 전 페이지 공통 og:image (jekyll-seo-tag가 og:image/twitter:image 절대 URL로 방출).
+  - scope:
+      path: ""
+    values:
+      image: /og-default.png
+  # posts 레이아웃
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
+# 빌드 산출물에서 제외
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - CLAUDE.md
+  - _workspace
+  - vendor
+  - .claude

@@ -1,0 +1,67 @@
+---
+layout: default
+---
+<article class="post">
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    <p class="post-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
+      <!-- 카테고리 라벨은 i18n로 스왑; data-cat으로 색 훅 제공 (frontend가 소비) -->
+      <span class="post-cat" data-cat="{{ page.cat }}" data-i18n="cat.{{ page.cat }}">{{ page.cat }}</span>
+    </p>
+  </header>
+
+  <div class="post-content">
+    {{ content }}
+  </div>
+
+  <footer class="post-footer">
+    <!-- 관련 글: 같은 cat의 다른 글 최신순 최대 3개. 하나도 없으면 섹션 미렌더. -->
+    {% assign same_cat = site.posts | where: "cat", page.cat %}
+    {% if same_cat.size > 1 %}
+    <section class="post-related" aria-labelledby="related-h">
+      <h2 id="related-h" class="post-related-heading" data-i18n="post.related">Related posts</h2>
+      <ul class="post-list">
+        {% assign shown = 0 %}
+        {% for post in same_cat %}
+          {% if post.url != page.url and shown < 3 %}
+          <li class="post-list-item">
+            <a class="post-list-link" href="{{ post.url | relative_url }}">
+              <span class="post-list-meta">
+                <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+                <span class="post-list-cat" data-cat="{{ post.cat }}" data-i18n="cat.{{ post.cat }}">{{ post.cat }}</span>
+              </span>
+              <span class="post-list-title">{{ post.title }}</span>
+            </a>
+          </li>
+          {% assign shown = shown | plus: 1 %}
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+    <!-- prev/next: 존재할 때만 렌더 -->
+    {% if page.previous or page.next %}
+    <nav class="post-nav" aria-label="Post navigation">
+      {% if page.previous %}
+      <a class="post-nav-link post-nav-prev" href="{{ page.previous.url | relative_url }}" rel="prev">
+        <span class="post-nav-label" data-i18n="post.prev">Previous</span>
+        <span class="post-nav-title">{{ page.previous.title }}</span>
+      </a>
+      {% endif %}
+      {% if page.next %}
+      <a class="post-nav-link post-nav-next" href="{{ page.next.url | relative_url }}" rel="next">
+        <span class="post-nav-label" data-i18n="post.next">Next</span>
+        <span class="post-nav-title">{{ page.next.title }}</span>
+      </a>
+      {% endif %}
+    </nav>
+    {% endif %}
+
+    <div class="post-footer-links">
+      <a class="back-to-blog" href="{{ '/blog/' | relative_url }}" data-i18n="post.back">← Blog</a>
+      <a class="post-rss" href="{{ '/feed.xml' | relative_url }}" data-i18n="footer.rss">RSS</a>
+    </div>
+  </footer>
+</article>

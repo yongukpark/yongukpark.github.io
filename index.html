@@ -1,0 +1,170 @@
+---
+layout: default
+permalink: /
+title: null
+---
+<!-- content-author: 이 페이지의 모든 문구는 data-i18n 키로 채운다. 구조/데이터 바인딩은 고정. -->
+
+<!-- 1. Cover (자소서 표지): 히어로 + 연구 관심사(01) + 프로필(02)을 한 프레임에 -->
+<section class="home-intro home-cover corner-squares" aria-labelledby="intro-name">
+  <span class="corner top-left" aria-hidden="true"></span>
+  <span class="corner top-right" aria-hidden="true"></span>
+  <span class="corner bottom-left" aria-hidden="true"></span>
+  <span class="corner bottom-right" aria-hidden="true"></span>
+  <div class="cover-head">
+    <div class="cover-head-text">
+      <p class="hero-eyebrow"><span data-i18n="home.intro.eyebrow">KAIST SAIL — Mechanistic Interpretability</span></p>
+      <h1 id="intro-name" data-word-reveal data-i18n="home.intro.name">Yonguk Park</h1>
+      <p class="intro-role" data-i18n="home.intro.role">Researcher</p>
+      <p class="intro-bio" data-i18n="home.intro.bio">Bio placeholder — content-author fills.</p>
+      <div class="hero-links">
+        <a class="hero-link hero-link-accent" href="{{ '/projects/' | relative_url }}" data-i18n="nav.projects">Projects</a>
+        <a class="hero-link" href="{{ '/blog/' | relative_url }}" data-i18n="nav.blog">Blog</a>
+        <a class="hero-link" href="https://github.com/{{ site.github }}" rel="me noopener" target="_blank" data-i18n="home.connect.github">GitHub</a>
+      </div>
+    </div>
+    <!-- 프로필 사진 자리. 실제 사진으로 바꾸려면 아래 div 내용을
+         <img class="avatar-img" src="{{ '/assets/profile.jpg' | relative_url }}" alt="박용욱 프로필 사진">
+         으로 교체하면 된다 (프레임/그림자는 .cover-avatar가 담당). -->
+    <div class="cover-avatar" aria-hidden="true"><span class="avatar-emoji">🧑‍💻</span></div>
+  </div>
+
+  <div class="cover-grid">
+    <!-- 01 Research interests -->
+    <section class="cover-col home-interests reveal" aria-labelledby="interests-h">
+      <div class="section-label"><span class="section-label-text" data-i18n="label.interests">Research</span></div>
+      <h2 id="interests-h" data-i18n="home.interests.heading">Research interests</h2>
+      <ul class="interests-list">
+        <li data-i18n="home.interests.item1">Interest 1</li>
+        <li data-i18n="home.interests.item2">Interest 2</li>
+        <li data-i18n="home.interests.item3">Interest 3</li>
+      </ul>
+    </section>
+
+    <!-- 02 Profile (인적사항) -->
+    <section class="cover-col home-profile reveal" aria-labelledby="connect-h">
+      <div class="section-label"><span class="section-label-text" data-i18n="label.connect">Profile</span></div>
+      <h2 id="connect-h" data-i18n="home.connect.heading">Profile</h2>
+      <dl class="profile-list">
+        <div class="profile-row"><dt data-i18n="profile.affiliation.dt">Affiliation</dt><dd data-i18n="profile.affiliation.dd">KAIST SAIL</dd></div>
+        <div class="profile-row"><dt data-i18n="profile.focus.dt">Research focus</dt><dd data-i18n="profile.focus.dd">Mechanistic interpretability</dd></div>
+        <div class="profile-row"><dt data-i18n="profile.github.dt">GitHub</dt><dd><a href="https://github.com/{{ site.github }}" rel="me noopener" target="_blank">@{{ site.github }}</a></dd></div>
+        <div class="profile-row"><dt data-i18n="profile.email.dt">Email</dt><dd><a href="mailto:{{ site.email }}">{{ site.email }}</a></dd></div>
+      </dl>
+    </section>
+  </div>
+</section>
+
+<!-- 2. CV 공간 (자소서 항목 스캐폴드): 실제 내용은 i18n.js의 cv.* 값만 바꾸면 된다.
+     블록(학력/연구 경력/수상/자격)이나 항목(li.cv-item)을 늘릴 땐 구조를 복제하고
+     cv.<블록>.<번호>.{period,title,desc} 키를 i18n.js ko/en 양쪽에 추가한다. -->
+<section class="home-cv reveal" aria-labelledby="cv-h">
+  <div class="section-label"><span class="section-label-text" data-i18n="label.cv">CV</span></div>
+  <h2 id="cv-h" data-i18n="home.cv.heading">CV</h2>
+  <div class="cv-grid">
+    <div class="cv-block">
+      <h3 class="cv-block-heading" data-i18n="cv.edu.heading">Education</h3>
+      <ul class="cv-items">
+        <li class="cv-item">
+          <span class="cv-period" data-i18n="cv.edu.1.period">0000.00 —</span>
+          <div class="cv-body">
+            <p class="cv-title" data-i18n="cv.edu.1.title">University · Major</p>
+            <p class="cv-desc" data-i18n="cv.edu.1.desc">One line</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="cv-block">
+      <h3 class="cv-block-heading" data-i18n="cv.exp.heading">Research experience</h3>
+      <ul class="cv-items">
+        <li class="cv-item">
+          <span class="cv-period" data-i18n="cv.exp.1.period">0000.00 —</span>
+          <div class="cv-body">
+            <p class="cv-title" data-i18n="cv.exp.1.title">Lab · Role</p>
+            <p class="cv-desc" data-i18n="cv.exp.1.desc">One line</p>
+          </div>
+        </li>
+        <li class="cv-item">
+          <span class="cv-period" data-i18n="cv.exp.2.period">0000.00 —</span>
+          <div class="cv-body">
+            <p class="cv-title" data-i18n="cv.exp.2.title">Lab · Role</p>
+            <p class="cv-desc" data-i18n="cv.exp.2.desc">One line</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="cv-block">
+      <h3 class="cv-block-heading" data-i18n="cv.awards.heading">Awards</h3>
+      <ul class="cv-items">
+        <li class="cv-item">
+          <span class="cv-period" data-i18n="cv.awards.1.period">0000</span>
+          <div class="cv-body">
+            <p class="cv-title" data-i18n="cv.awards.1.title">Award · Host</p>
+            <p class="cv-desc" data-i18n="cv.awards.1.desc">One line</p>
+          </div>
+        </li>
+        <li class="cv-item">
+          <span class="cv-period" data-i18n="cv.awards.2.period">0000</span>
+          <div class="cv-body">
+            <p class="cv-title" data-i18n="cv.awards.2.title">Award · Host</p>
+            <p class="cv-desc" data-i18n="cv.awards.2.desc">One line</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="cv-block">
+      <h3 class="cv-block-heading" data-i18n="cv.certs.heading">Certifications &amp; more</h3>
+      <ul class="cv-items">
+        <li class="cv-item">
+          <span class="cv-period" data-i18n="cv.certs.1.period">0000</span>
+          <div class="cv-body">
+            <p class="cv-title" data-i18n="cv.certs.1.title">Certification / Patent / Scholarship</p>
+            <p class="cv-desc" data-i18n="cv.certs.1.desc">One line</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 3. 대표 프로젝트 (요약 3개 미리보기 → 전체는 /projects/) -->
+<section class="home-projects reveal" aria-labelledby="projects-h">
+  <div class="section-label"><span class="section-label-text" data-i18n="label.projects">Projects</span></div>
+  <h2 id="projects-h" data-i18n="home.projects.heading">Representative projects</h2>
+  <ul class="project-preview-list">
+    <!-- content-author: 홈 미리보기는 대표 프로젝트 상위 3개. -->
+    <li class="project-card">
+      <h3 class="project-card-title" data-i18n="project.1.title">Project 1</h3>
+      <p class="project-card-meta" data-i18n="project.1.meta">Meta</p>
+    </li>
+    <li class="project-card">
+      <h3 class="project-card-title" data-i18n="project.2.title">Project 2</h3>
+      <p class="project-card-meta" data-i18n="project.2.meta">Meta</p>
+    </li>
+    <li class="project-card">
+      <h3 class="project-card-title" data-i18n="project.3.title">Project 3</h3>
+      <p class="project-card-meta" data-i18n="project.3.meta">Meta</p>
+    </li>
+  </ul>
+  <a class="section-more" href="{{ '/projects/' | relative_url }}" data-i18n="home.projects.viewall">All projects →</a>
+</section>
+
+<!-- 3. 최신 블로그 글 3개 — SERVER-SIDE Liquid, 링크는 실제 post.url -->
+<section class="home-latest reveal" aria-labelledby="latest-h">
+  <div class="section-label"><span class="section-label-text" data-i18n="label.latest">Writing</span></div>
+  <h2 id="latest-h" data-i18n="home.latest.heading">Latest posts</h2>
+  <ul class="latest-list">
+    {% for post in site.posts limit: 3 %}
+    <li class="latest-item">
+      <a class="latest-link" href="{{ post.url | relative_url }}">
+        <span class="latest-title">{{ post.title }}</span>
+        <span class="latest-meta">
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+          <span class="latest-cat" data-cat="{{ post.cat }}" data-i18n="cat.{{ post.cat }}">{{ post.cat }}</span>
+        </span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+  <a class="section-more" href="{{ '/blog/' | relative_url }}" data-i18n="home.latest.viewall">All posts →</a>
+</section>

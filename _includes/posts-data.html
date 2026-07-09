@@ -1,0 +1,23 @@
+<!--
+  posts-data.html — 자동 전파의 단일 진실 소스(single source of truth).
+  site.posts를 순회하여 프론트엔드(script.js의 아이디어 맵)가 소비할 JSON 배열을 방출한다.
+  필드명 계약(camelCase 금지, 그대로): url, title, date, cat, map_x, map_y
+  - url:  relative_url로 baseurl까지 흡수한 실제 상세 페이지 경로
+  - date: "YYYY-MM-DD" 문자열
+  - cat:  interp | llm | build (철자 고정)
+  - map_x, map_y: 0~1 실수 (숫자, jsonify 없이; 누락 시 0.5)
+-->
+<script id="posts-data" type="application/json">
+[
+  {% for post in site.posts %}
+  {
+    "url": {{ post.url | relative_url | jsonify }},
+    "title": {{ post.title | jsonify }},
+    "date": {{ post.date | date: "%Y-%m-%d" | jsonify }},
+    "cat": {{ post.cat | jsonify }},
+    "map_x": {{ post.map_x | default: 0.5 }},
+    "map_y": {{ post.map_y | default: 0.5 }}
+  }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+]
+</script>

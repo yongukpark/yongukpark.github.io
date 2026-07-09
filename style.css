@@ -1,0 +1,1160 @@
+/*
+ * style.css — Warm minimal researcher portfolio (Yonguk Park)
+ * OWNED BY frontend-crafter. Implements _workspace/01_architect_contract.md.
+ *
+ * Principles: whitespace, strong type hierarchy, 1px hairlines, micro fade.
+ * Redesign (05_redesign_brief, "Warm Paper-Technical Editorial") relaxes the old
+ * bans: layered low-chroma shadows, radius <=12px, subtle radial wash, and card
+ * surfaces are now allowed. Still banned: neon, purple/blue "AI" gradients, pure
+ * #000, 80%+ chroma accents, linear/ease-in-out transitions.
+ * Fonts: Fraunces (display serif — hero/h2/titles), Hanken Grotesk (body),
+ * IBM Plex Mono (meta / labels).
+ */
+
+/* ============================================================
+   1. Design tokens — light (default) + dark
+   ============================================================ */
+:root {
+  /* Warm light palette */
+  --bg:            #faf7f2;   /* warm off-white */
+  --surface:       #f1ebdf;   /* raised paper surface (a step deeper than --bg so cards read) */
+  --ink:           #22201d;   /* warm near-black text */
+  --ink-muted:     #6b645b;   /* secondary text */
+  --ink-faint:     #736c5e;   /* tertiary — WCAG AA 4.87:1 on --bg */
+  --hairline:      #e0d9cd;   /* thin rules / borders */
+  --hairline-strong:#cfc6b6;
+  --accent:        #a8552f;   /* restrained clay / terracotta */
+  --accent-ink:    #8f4526;   /* accent for text on light (AA) */
+  --focus:         #a8552f;   /* focus ring color */
+
+  /* Category color hooks (interp = flagship, accent-aligned) */
+  --cat-interp:    #a8552f;   /* clay — flagship */
+  --cat-llm:       #3f6b5e;   /* muted pine */
+  --cat-build:     #7a6396;   /* muted plum */
+
+  /* Type families */
+  --font-sans: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  /* Hangul-capable serif fallback: 기본 언어(ko)에서도 디스플레이 세리프가 살아야 한다. */
+  --font-display: "Fraunces", "Noto Serif KR", Georgia, "Times New Roman", serif;
+
+  /* Type scale */
+  --fs-900: clamp(2.75rem, 5.5vw, 4.25rem);  /* hero h1 (§6 de-AI: hierarchy via serif+weight, not size) */
+  --fs-800: clamp(1.9rem, 3.6vw, 2.5rem); /* page h1 */
+  --fs-700: clamp(1.7rem, 3vw, 2.2rem);   /* h2 (redesign §2) */
+  --fs-600: 1.25rem;                       /* h3 */
+  --fs-500: 1.0625rem;                     /* body-large */
+  --fs-400: 1rem;                          /* body */
+  --fs-300: 0.9375rem;                     /* small */
+  --fs-200: 0.8125rem;                     /* meta / mono */
+
+  --lh-tight: 1.18;
+  --lh-body:  1.65;
+
+  /* Spacing scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --space-9: 6.5rem;
+
+  /* Layout */
+  --maxw: 760px;
+  --maxw-wide: 1040px;
+  --pad-x: clamp(1.25rem, 5vw, 2.5rem);
+
+  --radius: 3px;
+  --radius-md: 8px;    /* card surface (§8 de-AI: unified 8px) */
+  --radius-lg: 8px;    /* map panel (§8 de-AI: unified 8px) */
+  --dur: 240ms;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);   /* redesign motion easing */
+
+  /* Container guide lines + corner squares (redesign §3) */
+  --line-color:  rgba(34, 32, 29, 0.08);
+  --line-strong: rgba(34, 32, 29, 0.18);
+  --corner-size: 6px;
+
+  /* Layered warm-neutral shadows (redesign §6 — beautiful-shadows, banilla) */
+  /* Ultra-diffuse warm shadows (§10 de-AI: softened alphas) */
+  --shadow-sm:
+    0 2px 3px -1px rgba(34, 30, 24, 0.05),
+    0 1px 0 0 rgba(34, 30, 24, 0.02),
+    0 0 0 1px rgba(34, 30, 24, 0.04);
+  --shadow-md:
+    0 0 0 1px rgba(34, 30, 24, 0.04),
+    0 1px 1px -0.5px rgba(34, 30, 24, 0.04),
+    0 3px 3px -1.5px rgba(34, 30, 24, 0.04),
+    0 6px 6px -3px rgba(34, 30, 24, 0.04),
+    0 12px 12px -6px rgba(34, 30, 24, 0.04),
+    0 24px 24px -12px rgba(34, 30, 24, 0.04);
+}
+
+[data-theme="dark"] {
+  --bg:            #1b1917;   /* warm deep charcoal-brown */
+  --surface:       #24211e;
+  --ink:           #efe9e0;   /* warm off-white text */
+  --ink-muted:     #b3aa9d;
+  --ink-faint:     #8a8175;
+  --hairline:      #322e29;
+  --hairline-strong:#453f38;
+  --accent:        #e08a5c;   /* brightened clay for dark contrast */
+  --accent-ink:    #eb9e73;
+  --focus:         #e08a5c;
+
+  --cat-interp:    #e08a5c;
+  --cat-llm:       #79b3a0;
+  --cat-build:     #b39cd0;
+
+  /* Guide lines + corners (dark) */
+  --line-color:  rgba(239, 233, 224, 0.07);
+  --line-strong: rgba(239, 233, 224, 0.16);
+
+  /* Shadows (dark) — ~1.6x alpha on pure black for depth on warm charcoal */
+  --shadow-sm:
+    0 2px 3px -1px rgba(0, 0, 0, 0.40),
+    0 1px 0 0 rgba(0, 0, 0, 0.10),
+    0 0 0 1px rgba(0, 0, 0, 0.30);
+  --shadow-md:
+    0 0 0 1px rgba(0, 0, 0, 0.30),
+    0 1px 1px -0.5px rgba(0, 0, 0, 0.28),
+    0 3px 3px -1.5px rgba(0, 0, 0, 0.28),
+    0 6px 6px -3px rgba(0, 0, 0, 0.28),
+    0 12px 12px -6px rgba(0, 0, 0, 0.28),
+    0 24px 24px -12px rgba(0, 0, 0, 0.28);
+}
+
+/* ============================================================
+   2. Reset / base
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--fs-400);
+  line-height: var(--lh-body);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+
+/* Fixed ultra-low-contrast paper noise texture (redesign §3).
+   Behind all content, never intercepts pointer events. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+[data-theme="dark"] body::before { opacity: 0.035; }
+
+/* Container guide lines: 1px verticals at the wide-container edges (redesign §3).
+   A single fixed backdrop layer draws both guides via left+right borders, aligned
+   to the --maxw-wide inner width shared by nav / #main / footer. Behind content. */
+body.container-lines::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: max(var(--pad-x), calc((100vw - var(--maxw-wide)) / 2));
+  right: max(var(--pad-x), calc((100vw - var(--maxw-wide)) / 2));
+  z-index: -1;
+  pointer-events: none;
+  border-left: 1px solid var(--line-color);
+  border-right: 1px solid var(--line-color);
+}
+
+h1, h2, h3, h4 {
+  line-height: var(--lh-tight);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--space-4);
+  text-wrap: balance;
+}
+
+/* Display serif (Fraunces) — hero h1, all h2, page/post titles, card titles.
+   Body h3/h4 and nav brand stay in the sans family. (redesign §2) */
+.home-intro h1,
+h2,
+.page-head h1,
+.post-title,
+.project-card-title {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-weight: 560;
+  letter-spacing: -0.015em;
+}
+
+p { margin: 0 0 var(--space-4); }
+
+a {
+  color: var(--accent-ink);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+ul { margin: 0; padding: 0; list-style: none; }
+
+img { max-width: 100%; height: auto; }
+
+::selection { background: var(--accent); color: #fff; }
+
+/* Focus visibility (keyboard) throughout */
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+:focus:not(:focus-visible) { outline: none; }
+
+/* ============================================================
+   3. Skip link (visually hidden until focused)
+   ============================================================ */
+.skip-link {
+  position: absolute;
+  left: var(--space-4);
+  top: -4rem;
+  z-index: 100;
+  background: var(--ink);
+  color: var(--bg);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: var(--fs-200);
+  transition: top var(--dur) var(--ease);
+}
+.skip-link:focus {
+  top: var(--space-4);
+  text-decoration: none;
+}
+
+/* ============================================================
+   4. Header / nav
+   ============================================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid var(--hairline);
+  /* Fallback: opaque bg (see @supports below). */
+  background: var(--bg);
+}
+@supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+  .site-header {
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+}
+.site-nav {
+  max-width: var(--maxw-wide);
+  margin: 0 auto;
+  padding: var(--space-4) var(--pad-x);
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+}
+.nav-brand {
+  font-weight: 700;
+  font-size: var(--fs-500);
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-right: auto;
+}
+.nav-brand:hover { text-decoration: none; color: var(--accent-ink); }
+
+.nav-links {
+  display: flex;
+  gap: var(--space-5);
+  align-items: center;
+}
+.nav-links a {
+  position: relative;
+  color: var(--ink-muted);
+  font-size: var(--fs-300);
+  font-weight: 500;
+}
+.nav-links a:hover { color: var(--ink); text-decoration: none; }
+
+/* Current page marker (architect sets aria-current="page" via Liquid) — redesign §3 */
+.nav-links a[aria-current="page"] {
+  color: var(--ink);
+}
+.nav-links a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.5rem;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.nav-toggles {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+}
+.toggle-btn {
+  font-family: var(--font-mono);
+  font-size: var(--fs-200);
+  color: var(--ink-muted);
+  background: transparent;
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius);
+  padding: var(--space-2) var(--space-3);
+  cursor: pointer;
+  line-height: 1;
+  transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.toggle-btn:hover { color: var(--ink); border-color: var(--ink-muted); }
+.toggle-btn[aria-pressed="true"] {
+  color: var(--accent-ink);
+  border-color: var(--accent);
+}
+
+/* ============================================================
+   5. Layout / main
+   ============================================================ */
+#main {
+  max-width: var(--maxw-wide);
+  margin: 0 auto;
+  padding: var(--space-8) var(--pad-x) var(--space-9);
+}
+#main:focus { outline: none; }
+
+section + section,
+.projects-page section,
+.blog-page > section {
+  margin-top: var(--space-8);
+}
+
+/* Constrained text measure for readable prose */
+.intro-bio,
+.page-intro,
+.post-content > p,
+.post-content > ul,
+.post-content > ol,
+.project-card-desc {
+  max-width: var(--maxw);
+}
+
+/* ============================================================
+   6. Home
+   ============================================================ */
+/* Hero — macro whitespace above/below (redesign §5) */
+.home-intro {
+  padding-top: var(--space-9);
+  padding-bottom: var(--space-8);
+}
+.home-intro h1 {
+  font-size: var(--fs-900);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-4);
+}
+
+/* Mono eyebrow above hero name (redesign §5) */
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-200);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--ink-faint);
+  margin-bottom: var(--space-4);
+}
+
+.intro-role {
+  font-family: var(--font-mono);
+  font-size: var(--fs-300);
+  color: var(--accent-ink);
+  letter-spacing: 0.01em;
+  margin-bottom: var(--space-5);
+}
+.intro-bio {
+  font-size: var(--fs-500);
+  color: var(--ink-muted);
+}
+
+/* Hero action buttons (§2 de-AI: 6px square, sans; primary = ink fill) */
+.hero-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+.hero-link {
+  font-family: var(--font-sans);
+  font-size: var(--fs-300);
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--ink);
+  border: 1px solid var(--hairline-strong);
+  border-radius: 6px;
+  padding: 0.5em 1.1em;
+  transition: color var(--dur) var(--ease-out),
+              border-color var(--dur) var(--ease-out),
+              background-color var(--dur) var(--ease-out),
+              transform var(--dur) var(--ease-out);
+}
+.hero-link:hover {
+  text-decoration: none;
+  border-color: var(--ink);
+  color: var(--ink);
+}
+.hero-link:active { transform: scale(0.98); }
+/* Primary: ink-filled — reverses automatically in dark (--ink light, --bg dark), AA holds */
+.hero-link-accent {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
+}
+.hero-link-accent:hover {
+  color: var(--bg);
+  background: color-mix(in srgb, var(--ink) 85%, var(--bg));
+  border-color: color-mix(in srgb, var(--ink) 85%, var(--bg));
+}
+
+/* Cover head: 텍스트(좌) + 프로필 사진 자리(우). 사진 전 임시로 이모지. */
+.cover-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+.cover-head-text { min-width: 0; }
+.cover-avatar {
+  flex: none;
+  width: clamp(96px, 12vw, 150px);
+  aspect-ratio: 1;
+  border-radius: 8px;              /* §8 de-AI: unified 8px, quiet hairline frame */
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: var(--space-2);      /* optically align with eyebrow/h1 */
+}
+.avatar-emoji {
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  line-height: 1;
+}
+/* 실제 사진으로 교체 시 (.cover-avatar 안의 <img>) */
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Cover composition (자소서 표지): 연구 관심사(01) + 프로필(02)을 히어로 프레임 안에.
+   이름이 표지 제목, 두 컬럼은 부속 정보 — h2를 한 단계 낮춰 위계를 지킨다. */
+.cover-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: var(--space-6) var(--space-8);
+  margin-top: var(--space-7);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--hairline);
+}
+.cover-grid > section { margin-top: 0; }   /* neutralize global section+section spacing */
+.cover-col h2 { font-size: var(--fs-600); margin-bottom: var(--space-4); }
+.cover-col .section-label { margin-bottom: var(--space-2); }
+.cover-col .profile-row dt { flex: 0 0 7.5rem; }
+
+/* CV scaffold (홈 03) — 자소서 항목 공간: 학력/연구 경력/수상/자격 블록의 2컬럼 그리드.
+   내용은 i18n.js의 cv.* 키. 항목 행 = 기간(모노) + 제목/한 줄 설명. */
+.cv-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6) var(--space-8);
+  max-width: var(--maxw-wide);
+}
+.cv-block-heading {
+  font-family: var(--font-mono);
+  font-size: var(--fs-200);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-faint);
+  margin-bottom: var(--space-3);
+}
+.cv-items { border-top: 1px solid var(--hairline); }
+.cv-item {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-5);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--hairline);
+}
+.cv-period {
+  flex: 0 0 7.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-200);
+  color: var(--ink-faint);
+}
+.cv-body { min-width: 0; }
+.cv-title {
+  font-weight: 600;
+  font-size: var(--fs-400);
+  margin-bottom: var(--space-1);
+}
+.cv-desc {
+  color: var(--ink-muted);
+  font-size: var(--fs-300);
+  margin-bottom: 0;
+}
+
+/* Corner squares — measured framing on hero (redesign §3, container-lines) */
+.corner-squares { position: relative; }
+.corner-squares > .corner {
+  position: absolute;
+  width: var(--corner-size);
+  height: var(--corner-size);
+  background: var(--line-strong);
+  pointer-events: none;
+}
+.corner.top-left     { top: 0; left: 0;  transform: translate(-50%, -50%); }
+.corner.top-right    { top: 0; right: 0; transform: translate(50%, -50%); }
+.corner.bottom-left  { bottom: 0; left: 0;  transform: translate(-50%, 50%); }
+.corner.bottom-right { bottom: 0; right: 0; transform: translate(50%, 50%); }
+
+/* Section eyebrow labels — mono kicker, hairline tick (redesign §4) */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-200);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  margin-bottom: var(--space-3);
+  padding-left: var(--space-4);
+  position: relative;
+}
+.section-label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0.9rem;
+  height: 1px;
+  background: var(--accent);
+}
+.section-label-text { color: var(--ink-faint); }
+
+h2 { font-size: var(--fs-700); }
+
+.interests-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: var(--maxw);
+}
+.interests-list li {
+  padding-left: var(--space-5);
+  position: relative;
+  color: var(--ink);
+}
+.interests-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 0.7rem;
+  height: 1px;
+  background: var(--accent);
+}
+
+/* Section "view all" link */
+.section-more {
+  display: inline-block;
+  margin-top: var(--space-5);
+  font-family: var(--font-mono);
+  font-size: var(--fs-200);
+  color: var(--accent-ink);
+}
+
+/* Latest posts list */
+.latest-list { border-top: 1px solid var(--hairline); }
+.latest-item { border-bottom: 1px solid var(--hairline); }
+.latest-link {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-3) var(--space-5);
+  /* inline padding + negative margin keeps text aligned while giving hover fill
+     room (no layout shift) — redesign §6 */
+  padding: var(--space-4);
+  margin-inline: calc(-1 * var(--space-4));
+  border-radius: var(--radius);
+  color: var(--ink);
+  transition: background-color var(--dur) var(--ease-out);
+}
+.latest-link:hover { text-decoration: none; background: var(--surface); }
+.latest-link:hover .latest-title { color: var(--accent-ink); }
+.latest-link:hover::before,
+.latest-link:focus-visible::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: var(--space-2);
+  bottom: var(--space-2);
+  width: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+.latest-title { font-weight: 600; font-size: var(--fs-500); flex: 1 1 60%; }
+.latest-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-200);
+  color: var(--ink-muted);
+  margin-left: auto;
+}
+
+/* Profile (인적사항) rows — quiet dl, hairline per row, mono terms (iteration2 §A2) */
+.profile-list {
+  margin: 0;
+  max-width: var(--maxw);
+}
+.profile-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-5);
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--hairline);
+}
+.profile-row:last-child { border-bottom: 1px solid var(--hairline); }
+.profile-row dt {
+  flex: 0 0 10rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-200);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+}
+.profile-row dd {
+  margin: 0;
+  color: var(--ink);
+  font-size: var(--fs-400);
+  overflow-wrap: anywhere;
+}
+
+/* ============================================================
+   7. Project cards — surface treatment (redesign §6)
+   ============================================================ */
+.project-preview-list,
+.projects-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5) var(--space-6);
+}
+.projects-list { grid-template-columns: 1fr; gap: var(--space-5); }
+
+/* Single edge grammar per theme: light = layered shadow (its own 1px ring layer),
+   dark = 1px border (shadows are invisible on warm charcoal). Border kept
+   transparent in light so box metrics match across themes. */
+.project-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--dur) var(--ease-out),
+              box-shadow var(--dur) var(--ease-out),
+              border-color var(--dur) var(--ease-out);
+}
+.project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+[data-theme="dark"] .project-card {
+  border-color: var(--hairline);
+  box-shadow: none;
+}
+[data-theme="dark"] .project-card:hover {
+  border-color: var(--hairline-strong);
+  box-shadow: none;
+}
+/* Projects page: editorial hairline rows, not boxes (§9 de-AI).
+   Home preview keeps the quiet card above; here the box grammar is dropped. */
+.projects-list .project-card {
+  background: none;
+  border: none;
+  border-top: 1px solid var(--hairline);
+  border-radius: 0;
+  box-shadow: none;
+  padding: var(--space-6) 0;
+}
+.projects-list .project-card:hover {
+  transform: none;
+  box-shadow: none;
+}
+.projects-list .project-card:hover .project-card-title {
+  color: var(--accent-ink);
+}
+[data-theme="dark"] .projects-list .project-card {
+  border: none;
+  border-top: 1px solid var(--hairline);
+  box-shadow: none;
+}
+[data-theme="dark"] .projects-list .project-card:hover {
+  border-color: var(--hairline);
+  box-shadow: none;
+}
+
+.project-card-title {
+  font-size: var(--fs-600);
+  font-weight: 560;
+  margin-bottom: var(--space-2);
+}
+.project-card-meta {
+  font-family: var(--font-mono);
+  font-size: var(--fs-200);
+  color: var(--ink-muted);
+  margin-bottom: var(--space-3);
+}
+.project-card-desc {
+  color: var(--ink-muted);
+  font-size: var(--fs-400);
+  margin-bottom: 0;
+}
+
+/* ============================================================
+   8. Page head (projects / blog)
+   ============================================================ */
+.page-head h1 { font-size: var(--fs-800); }
+.page-intro {
+  font-size: var(--fs-500);
+  color: var(--ink-muted);
+}
+
+/* ============================================================
+   9. Category color hooks — consumed via [data-cat]
+   ============================================================ */
+.latest-cat,
+.post-list-cat,
+.post-cat {
+  font-family: var(--font-mono);
+  font-size: var(--fs-200);
+  color: var(--ink-muted);
+  position: relative;
+  padding-left: 0.85rem;
+}
+.latest-cat::before,
+.post-list-cat::before,
+.post-cat::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--cat-color, var(--ink-faint));
+}
+[data-cat="interp"] { --cat-color: var(--cat-interp); }
+[data-cat="llm"]    { --cat-color: var(--cat-llm); }
+[data-cat="build"]  { --cat-color: var(--cat-build); }
+
+/* ============================================================
+   10. Blog list
+   ============================================================ */
+.post-list { border-top: 1px solid var(--hairline); }
+.post-list-item { border-bottom: 1px solid var(--hairline); }
+.post-list-link {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-5) var(--space-4);
+  margin-inline: calc(-1 * var(--space-4));
+  border-radius: var(--radius);
+  color: var(--ink);
+  transition: background-color var(--dur) var(--ease-out);
+}
+.post-list-link:hover { text-decoration: none; background: var(--surface); }
+.post-list-link:hover .post-list-title { color: var(--accent-ink); }
+.post-list-link:hover::before,
+.post-list-link:focus-visible::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: var(--space-3);
+  bottom: var(--space-3);
+  width: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+.post-list-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--fs-200);
+  color: var(--ink-muted);
+}
+.post-list-title { font-size: var(--fs-600); font-weight: 600; }
+
+.blog-empty { color: var(--ink-muted); }
+
+/* ============================================================
+   11. Idea map
+   ============================================================ */
+.map-disclaimer {
+  font-family: var(--font-mono);
+  font-size: var(--fs-200);
+  color: var(--ink-faint);
+  max-width: var(--maxw);
+}
+.idea-map {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 320px;
+  margin: var(--space-5) 0;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  background-color: var(--surface);
+  box-shadow: var(--shadow-md);
+  overflow: visible;
+}
+/* 8px inset frame line — technical paper-panel feel (redesign §6) */
+.idea-map::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid var(--line-color);
+  border-radius: calc(var(--radius-lg) - 5px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.map-dot {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;   /* center on coordinate */
+  border-radius: 50%;
+  background: var(--cat-color, var(--accent));
+  border: 2px solid var(--bg);
+  cursor: pointer;
+  transition: transform var(--dur) var(--ease);
+  z-index: 1;
+}
+.map-dot:hover,
+.map-dot:focus-visible {
+  transform: scale(1.35);
+  z-index: 3;
+}
+.map-dot:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Tooltip revealed on hover/focus */
+.map-tooltip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%);
+  min-width: 140px;
+  max-width: 220px;
+  background: var(--ink);
+  color: var(--bg);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius);
+  font-size: var(--fs-200);
+  line-height: 1.4;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--dur) var(--ease);
+  z-index: 4;
+}
+.map-dot:hover .map-tooltip,
+.map-dot:focus-visible .map-tooltip,
+.map-dot:focus .map-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+.map-tooltip-title { font-weight: 600; display: block; }
+.map-tooltip-meta {
+  font-family: var(--font-mono);
+  color: var(--ink-faint);
+  display: block;
+  margin-top: 2px;
+}
+.map-empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-faint);
+  font-family: var(--font-mono);
+  font-size: var(--fs-200);
+}
+
+/* Legend */
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4) var(--space-5);
+  font-family: var(--font-mono);
+  font-size: var(--fs-200);
+  color: var(--ink-muted);
+}
+.map-legend li { display: inline-flex; align-items: center; gap: var(--space-2); }
+.legend-swatch {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  background: var(--cat-color, var(--ink-faint));
+  display: inline-block;
+}
+
+/* ============================================================
+   12. Post detail
+   ============================================================ */
+.post { max-width: var(--maxw); }
+.post-title { font-size: var(--fs-800); }
+.post-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--fs-200);
+  color: var(--ink-muted);
+  margin-bottom: var(--space-6);
+}
+.post-content { font-size: var(--fs-500); }
+.post-content h2 { margin-top: var(--space-7); font-size: var(--fs-700); }
+.post-content h3 { margin-top: var(--space-6); font-size: var(--fs-600); }
+.post-content a { text-decoration: underline; text-underline-offset: 3px; }
+.post-content code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--surface);
+  padding: 0.1em 0.35em;
+  border-radius: var(--radius);
+}
+.post-content pre {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  overflow-x: auto;
+}
+.post-content pre code { background: none; padding: 0; }
+.post-content blockquote {
+  border-left: 2px solid var(--accent);
+  margin: var(--space-5) 0;
+  padding-left: var(--space-4);
+  color: var(--ink-muted);
+}
+.post-footer {
+  margin-top: var(--space-8);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--hairline);
+}
+.back-to-blog {
+  font-family: var(--font-mono);
+  font-size: var(--fs-200);
+  color: var(--accent-ink);
+}
+
+/* Post retention block (iteration2 §B2): related posts / prev-next / footer links */
+.post-related { margin-bottom: var(--space-7); }
+.post-related-heading { font-size: var(--fs-600); margin-bottom: var(--space-3); }
+
+.post-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4) var(--space-6);
+  margin-bottom: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--hairline);
+}
+.post-nav-link {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  color: var(--ink);
+}
+.post-nav-link:hover { text-decoration: none; }
+.post-nav-link:hover .post-nav-title { color: var(--accent-ink); }
+.post-nav-next { grid-column: 2; text-align: right; }
+.post-nav-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-200);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+}
+.post-nav-title { font-weight: 600; font-size: var(--fs-400); }
+
+.post-footer-links {
+  display: flex;
+  gap: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--hairline);
+}
+.post-rss {
+  font-family: var(--font-mono);
+  font-size: var(--fs-200);
+  color: var(--ink-muted);
+}
+.post-rss:hover { color: var(--accent-ink); }
+
+/* ============================================================
+   13. Footer
+   ============================================================ */
+.site-footer {
+  border-top: 1px solid var(--hairline);
+  margin-top: var(--space-9);
+}
+.site-footer > * {
+  max-width: var(--maxw-wide);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--pad-x);
+  padding-right: var(--pad-x);
+}
+.footer-links {
+  display: flex;
+  gap: var(--space-5);
+  padding-top: var(--space-6);
+  font-family: var(--font-mono);
+  font-size: var(--fs-200);
+}
+.footer-links a { color: var(--ink-muted); }
+.footer-links a:hover { color: var(--ink); }
+.footer-copy {
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-6);
+  font-family: var(--font-mono);
+  font-size: var(--fs-200);
+  color: var(--ink-faint);
+}
+
+/* ============================================================
+   14. Reveal (IntersectionObserver) + staggered word reveal
+   ============================================================ */
+/* Scroll reveal: fade + subtle rise, sibling stagger via --reveal-i (§7 de-AI: no blur) */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 600ms var(--ease-out),
+              transform 600ms var(--ease-out);
+  transition-delay: calc(var(--reveal-i, 0) * 70ms);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Staggered word reveal — hero h1 (redesign §5, staggered-word-reveal skill).
+   No-JS keeps text visible; only html.js hides pre-split, pre-ready state. */
+[data-word-reveal] { visibility: visible; }
+html.js [data-word-reveal]:not(.is-ready) { opacity: 0; }
+
+.word-reveal__word {
+  display: inline-block;
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  transition: opacity 800ms var(--ease-out), transform 800ms var(--ease-out);
+  transition-delay: calc(var(--word-index) * 0.07s);
+  will-change: opacity, transform;
+}
+[data-word-reveal].is-visible .word-reveal__word {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* ============================================================
+   15. Responsive — mobile = single column
+   ============================================================ */
+@media (max-width: 640px) {
+  #main { padding-top: var(--space-6); }
+
+  /* Guides would collide with body text at mobile padding — retire them. */
+  body.container-lines::after { display: none; }
+
+  .home-intro { padding-top: var(--space-7); padding-bottom: var(--space-6); }
+
+  /* Row 1: brand (full width) · Row 2: page links first, toggles trail right —
+     scan order stays content-before-controls. */
+  .site-nav { gap: var(--space-3); }
+  .nav-brand { flex: 1 1 100%; margin-right: 0; }
+  .nav-links { order: 2; gap: var(--space-4); }
+  .nav-toggles { order: 3; margin-left: auto; }
+
+  /* single column for all grids */
+  .project-preview-list { grid-template-columns: 1fr; gap: var(--space-5); }
+
+  .latest-link { gap: var(--space-1) var(--space-4); }
+  .latest-meta { margin-left: 0; }
+
+  /* Cover collapses to a single column */
+  .cover-grid { grid-template-columns: 1fr; gap: var(--space-6); }
+  .cover-avatar { width: 76px; margin-top: 0; }  /* stays top-right, smaller */
+  .cv-grid { grid-template-columns: 1fr; gap: var(--space-6); }
+  .cv-item { flex-direction: column; gap: var(--space-1); }
+  .cv-period { flex: none; }
+
+  /* Profile rows + post prev/next stack vertically on narrow screens */
+  .profile-row { flex-direction: column; gap: var(--space-1); }
+  .profile-row dt { flex: none; }
+  .cover-col .profile-row dt { flex: none; }
+  .post-nav { grid-template-columns: 1fr; }
+  .post-nav-next { grid-column: 1; text-align: left; }
+
+  .idea-map { aspect-ratio: auto; min-height: 260px; }
+}
+
+/* ============================================================
+   16. Reduced motion — disable all transitions/animation
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* Force all reveal/word content to its final, readable state. */
+  .reveal { opacity: 1; transform: none; }
+  html.js [data-word-reveal]:not(.is-ready),
+  .word-reveal__word {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

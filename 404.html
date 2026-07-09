@@ -1,0 +1,16 @@
+---
+layout: default
+permalink: /404.html
+title: "404"
+---
+<!-- content-author: notfound.* 키 (title/desc/back)를 i18n.js에 채운다. 구조/링크는 고정. -->
+<section class="notfound-page" aria-labelledby="notfound-h">
+  <header class="page-head reveal">
+    <div class="section-label"><span class="section-label-text">404 — Not Found</span></div>
+    <h1 id="notfound-h" data-i18n="notfound.title">Page not found</h1>
+    <p class="page-intro" data-i18n="notfound.desc">This page may have been moved or removed.</p>
+  </header>
+  <p class="notfound-back">
+    <a class="section-more" href="{{ '/' | relative_url }}" data-i18n="notfound.back">← Back home</a>
+  </p>
+</section>

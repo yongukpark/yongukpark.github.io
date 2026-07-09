@@ -1,0 +1,27 @@
+<header class="site-header">
+  <nav class="site-nav" aria-label="Primary">
+    <a class="nav-brand" href="{{ '/' | relative_url }}" data-i18n="nav.brand">Yonguk Park</a>
+
+    <ul class="nav-links">
+      <li><a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %} data-i18n="nav.home">Home</a></li>
+      <li><a href="{{ '/projects/' | relative_url }}"{% if page.url == '/projects/' %} aria-current="page"{% endif %} data-i18n="nav.projects">Projects</a></li>
+      <li><a href="{{ '/blog/' | relative_url }}"{% if page.url contains '/blog' %} aria-current="page"{% endif %} data-i18n="nav.blog">Blog</a></li>
+    </ul>
+
+    <div class="nav-toggles">
+      <!-- 테마 토글: script.js가 aria-pressed와 <html data-theme>를 갱신 -->
+      <button type="button" id="theme-toggle" class="toggle-btn"
+              aria-pressed="false"
+              aria-label="Toggle color theme"
+              data-i18n-aria="nav.theme.aria">
+        <span class="toggle-label" data-i18n="nav.theme.label">Theme</span>
+      </button>
+      <!-- 언어 토글: script.js가 <html lang>와 모든 [data-i18n]을 스왑 -->
+      <button type="button" id="lang-toggle" class="toggle-btn"
+              aria-label="Toggle language"
+              data-i18n-aria="nav.lang.aria">
+        <span class="toggle-label" data-i18n="nav.lang.label">EN</span>
+      </button>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- lang은 script.js가 언어 토글 시 ko/en으로 갱신한다. 초기값은 인라인 스크립트가 localStorage에서 적용. -->
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- SEO: jekyll-seo-tag가 title/description/canonical/og/JSON-LD를 생성. jekyll-feed가 feed 링크 삽입. -->
+  {% seo %}
+  {% feed_meta %}
+
+  <!-- Favicon + 브라우저 UI 색 -->
+  <link rel="icon" href="{{ '/favicon.svg' | relative_url }}" type="image/svg+xml">
+  <meta name="theme-color" content="#faf7f2">
+
+  <!-- No-FOUC: 첫 페인트 전에 저장된 테마/언어를 <html>에 적용 -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (!t) { t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        document.documentElement.setAttribute('data-theme', t);
+        var l = localStorage.getItem('lang') || 'ko';
+        document.documentElement.setAttribute('lang', l);
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Fonts: Fraunces (디스플레이 세리프) + Hanken Grotesk (본문) + IBM Plex Mono (메타/코드) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=Noto+Serif+KR:wght@400;600&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
+</head>
+<body class="container-lines">
+  <!-- skip-link: 키보드 사용자가 본문으로 바로 이동 -->
+  <a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
+
+  {% include nav.html %}
+
+  <main id="main" tabindex="-1">
+    {{ content }}
+  </main>
+
+  <footer class="site-footer">
+    <nav class="footer-links" aria-label="External links">
+      <a href="https://github.com/{{ site.github }}" rel="me noopener" target="_blank" data-i18n="footer.github">GitHub</a>
+      <a href="mailto:{{ site.email }}" data-i18n="footer.email">Email</a>
+      <a href="{{ '/feed.xml' | relative_url }}" data-i18n="footer.rss">RSS</a>
+    </nav>
+    <p class="footer-copy"><span data-i18n="footer.copyright">© Yonguk Park</span></p>
+  </footer>
+
+  <!-- i18n 사전: content-author가 window.I18N = {ko:{...}, en:{...}} 를 채운다 -->
+  <script src="{{ '/i18n.js' | relative_url }}"></script>
+  <!-- 동작(테마/언어/맵/fade): frontend-crafter가 구현 -->
+  <script src="{{ '/script.js' | relative_url }}"></script>
+</body>
+</html>

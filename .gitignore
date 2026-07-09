@@ -1,0 +1,16 @@
+# Jekyll build output & cache
+_site/
+.jekyll-cache/
+.jekyll-metadata
+
+# Ruby / bundler
+.bundle/
+vendor/
+
+# Agent working files (internal — not for public site)
+_workspace/
+.claude/
+CLAUDE.md
+
+# OS
+.DS_Store
