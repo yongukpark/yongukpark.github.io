@@ -58,8 +58,7 @@
     "blog.list.heading", "blog.empty",
     // post
     "post.back",
-    // redesign brief §9 — hero eyebrow, mono section labels, 404 page
-    "home.intro.eyebrow",
+    // redesign brief §9 — mono section labels, 404 page
     "label.interests", "label.projects", "label.latest", "label.connect", "label.blog",
     "notfound.title", "notfound.desc", "notfound.back",
     // iteration2 §D — profile rows, post retention, RSS
