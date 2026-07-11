@@ -577,3 +577,30 @@ section { scroll-margin-top: 6rem; }
   .post-nav { grid-template-columns: 1fr; }
   .site-footer { flex-direction: column; }
 }
+
+/* Homepage redesign: a quiet, authored research index. */
+body { background: var(--bg); }
+body::before { display: none; }
+.site-header { background: var(--bg); backdrop-filter: none; -webkit-backdrop-filter: none; }
+.nav-brand::before { display: none; }
+.nav-links a, .toggle-btn { padding: .38rem .3rem; border-radius: 0; }
+.nav-links a:hover, .nav-links a[aria-current="page"], .toggle-btn:hover { background: transparent; border-color: transparent; }
+.nav-links a[aria-current="page"] { border-bottom-color: var(--accent); font-weight: 650; }
+.toggle-btn[aria-pressed="true"] { background: transparent; border-color: transparent; border-bottom-color: var(--accent); }
+.hero-eyebrow { display: block; width: auto; padding: 0; border: 0; border-radius: 0; background: transparent; }
+.home-intro .hero-link { min-height: 2rem; padding: .25rem 0; border: 0; border-radius: 0; background: transparent; color: var(--accent-ink); text-decoration: underline; }
+.home-intro .hero-link::after { content: " →"; }
+.home-intro .hero-link:hover { background: transparent; color: var(--ink); }
+.cover-grid { grid-template-columns: minmax(0, 2fr) minmax(16rem, 1fr); gap: clamp(2rem, 5vw, 4.5rem); }
+.home-projects { margin-top: var(--space-8); }
+.home-projects, .home-latest { margin-bottom: var(--space-8); }
+.project-preview-copy { min-width: 0; }
+.project-preview-row .project-card-desc { margin-top: .45rem; max-width: 42rem; }
+.project-preview-row:first-child { padding-block: var(--space-5); }
+.home-projects .section-more, .home-latest .section-more { min-height: auto; padding: .25rem 0; border: 0; border-radius: 0; background: transparent; color: var(--accent-ink); text-decoration: underline; }
+.home-latest .latest-cat { border: 0; border-radius: 0; padding: 0; background: transparent; }
+@media (max-width: 900px) {
+  .cover-grid { grid-template-columns: 1fr; gap: var(--space-6); }
+  .home-projects { margin-top: var(--space-7); }
+  .home-projects, .home-latest { margin-bottom: var(--space-7); }
+}

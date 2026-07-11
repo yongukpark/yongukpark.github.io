@@ -5,12 +5,8 @@ title: null
 ---
 <!-- content-author: 이 페이지의 모든 문구는 data-i18n 키로 채운다. 구조/데이터 바인딩은 고정. -->
 
-<!-- 1. Cover (자소서 표지): 히어로 + 연구 관심사(01) + 프로필(02)을 한 프레임에 -->
-<section class="home-intro home-cover corner-squares" aria-labelledby="intro-name">
-  <span class="corner top-left" aria-hidden="true"></span>
-  <span class="corner top-right" aria-hidden="true"></span>
-  <span class="corner bottom-left" aria-hidden="true"></span>
-  <span class="corner bottom-right" aria-hidden="true"></span>
+<!-- 1. Intro + research questions + profile note -->
+<section class="home-intro home-cover" aria-labelledby="intro-name">
   <div class="cover-head">
     <div class="cover-head-text">
       <p class="hero-eyebrow" data-i18n="home.intro.eyebrow">KAIST SAIL · LLM internals · tool-using agents</p>
@@ -58,15 +54,24 @@ title: null
   <ul class="project-preview-list">
     <!-- content-author: 홈 미리보기는 대표 프로젝트 상위 3개. -->
     <li class="project-preview-row">
-      <h3 class="project-card-title" data-i18n="project.1.title">Project 1</h3>
+      <div class="project-preview-copy">
+        <h3 class="project-card-title" data-i18n="project.1.title">Project 1</h3>
+        <p class="project-card-desc" data-i18n="project.1.desc">Description</p>
+      </div>
       <p class="project-card-meta" data-i18n="project.1.meta">Meta</p>
     </li>
     <li class="project-preview-row">
-      <h3 class="project-card-title" data-i18n="project.2.title">Project 2</h3>
+      <div class="project-preview-copy">
+        <h3 class="project-card-title" data-i18n="project.2.title">Project 2</h3>
+        <p class="project-card-desc" data-i18n="project.2.desc">Description</p>
+      </div>
       <p class="project-card-meta" data-i18n="project.2.meta">Meta</p>
     </li>
     <li class="project-preview-row">
-      <h3 class="project-card-title" data-i18n="project.3.title">Project 3</h3>
+      <div class="project-preview-copy">
+        <h3 class="project-card-title" data-i18n="project.3.title">Project 3</h3>
+        <p class="project-card-desc" data-i18n="project.3.desc">Description</p>
+      </div>
       <p class="project-card-meta" data-i18n="project.3.meta">Meta</p>
     </li>
   </ul>
