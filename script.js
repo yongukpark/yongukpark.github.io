@@ -41,10 +41,9 @@
     // categories
     "cat.interp", "cat.llm", "cat.build",
     // home
-    "home.intro.name", "home.intro.role", "home.intro.bio",
+    "home.intro.name",
     "home.interests.heading", "home.interests.item1", "home.interests.item2", "home.interests.item3",
-    "home.projects.heading", "home.projects.viewall",
-    "home.latest.heading", "home.latest.viewall",
+    "home.projects.heading", "home.latest.heading",
     "home.connect.heading", "home.connect.github", "home.connect.email",
     // projects
     "projects.heading", "projects.intro",
@@ -65,14 +64,11 @@
     "profile.affiliation.dt", "profile.affiliation.dd", "profile.focus.dt", "profile.focus.dd",
     "profile.github.dt", "profile.email.dt",
     "post.related", "post.prev", "post.next", "footer.rss",
-    // CV scaffold (home §03)
+    // CV (home §03); empty subsections retain heading keys but are not rendered
     "label.cv", "home.cv.heading",
-    "cv.edu.heading", "cv.edu.1.period", "cv.edu.1.title", "cv.edu.1.desc",
-    "cv.exp.heading", "cv.exp.1.period", "cv.exp.1.title", "cv.exp.1.desc",
-    "cv.exp.2.period", "cv.exp.2.title", "cv.exp.2.desc",
-    "cv.awards.heading", "cv.awards.1.period", "cv.awards.1.title", "cv.awards.1.desc",
-    "cv.awards.2.period", "cv.awards.2.title", "cv.awards.2.desc",
-    "cv.certs.heading", "cv.certs.1.period", "cv.certs.1.title", "cv.certs.1.desc"
+    "cv.edu.heading", "cv.gpa.heading", "cv.publications.heading",
+    "cv.awards.heading", "cv.awards.1.title", "cv.awards.1.desc",
+    "cv.awards.2.title", "cv.awards.2.desc"
   ];
 
   // ---------------------------------------------------------------------------

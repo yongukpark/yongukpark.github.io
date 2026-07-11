@@ -9,15 +9,7 @@ title: null
 <section class="home-intro home-cover" aria-labelledby="intro-name">
   <div class="cover-head">
     <div class="cover-head-text">
-      <p class="hero-eyebrow" data-i18n="home.intro.eyebrow">KAIST SAIL · LLM internals · tool-using agents</p>
       <h1 id="intro-name" data-word-reveal data-i18n="home.intro.name">Yonguk Park</h1>
-      <p class="intro-role" data-i18n="home.intro.role">Researcher</p>
-      <p class="intro-bio" data-i18n="home.intro.bio">Bio placeholder — content-author fills.</p>
-      <div class="hero-links">
-        <a class="hero-link hero-link-accent" href="{{ '/projects/' | relative_url }}" data-i18n="nav.projects">Projects</a>
-        <a class="hero-link" href="{{ '/blog/' | relative_url }}" data-i18n="nav.blog">Blog</a>
-        <a class="hero-link" href="https://github.com/{{ site.github }}" rel="me noopener" target="_blank" data-i18n="home.connect.github">GitHub</a>
-      </div>
     </div>
   </div>
 
@@ -43,14 +35,24 @@ title: null
         <div class="profile-row"><dt data-i18n="profile.github.dt">GitHub</dt><dd><a href="https://github.com/{{ site.github }}" rel="me noopener" target="_blank">@{{ site.github }}</a></dd></div>
         <div class="profile-row"><dt data-i18n="profile.email.dt">Email</dt><dd><a href="mailto:{{ site.email }}">{{ site.email }}</a></dd></div>
       </dl>
+      <section class="home-cv" aria-labelledby="cv-h">
+        <h3 id="cv-h" data-i18n="home.cv.heading">CV</h3>
+        <section class="cv-group" aria-labelledby="cv-awards-h">
+          <h4 id="cv-awards-h" data-i18n="cv.awards.heading">Awards</h4>
+          <ul class="cv-list">
+            <li class="cv-item"><strong data-i18n="cv.awards.1.title">Grand Prize</strong><span data-i18n="cv.awards.1.desc">Kakao × KSC · MCP-based AI agent</span></li>
+            <li class="cv-item"><strong data-i18n="cv.awards.2.title">Excellence Award</strong><span data-i18n="cv.awards.2.desc">Human vs. AI-generated text classifier</span></li>
+          </ul>
+        </section>
+      </section>
     </section>
   </div>
 </section>
 
-<!-- 2. 대표 프로젝트 (요약 3개 미리보기 → 전체는 /projects/) -->
+<!-- 2. 프로젝트 (요약 3개 미리보기) -->
 <section class="home-projects reveal" aria-labelledby="projects-h">
   <div class="section-label"><span class="section-label-text" data-i18n="label.projects">Projects</span></div>
-  <h2 id="projects-h" data-i18n="home.projects.heading">Representative projects</h2>
+  <h2 id="projects-h" data-i18n="home.projects.heading">Projects</h2>
   <ul class="project-preview-list">
     <!-- content-author: 홈 미리보기는 대표 프로젝트 상위 3개. -->
     <li class="project-preview-row">
@@ -75,7 +77,7 @@ title: null
       <p class="project-card-meta" data-i18n="project.3.meta">Meta</p>
     </li>
   </ul>
-  <a class="section-more" href="{{ '/projects/' | relative_url }}" data-i18n="home.projects.viewall">All projects →</a>
+
 </section>
 
 <!-- 3. 최신 블로그 글 3개 — SERVER-SIDE Liquid, 링크는 실제 post.url -->
@@ -95,5 +97,5 @@ title: null
     </li>
     {% endfor %}
   </ul>
-  <a class="section-more" href="{{ '/blog/' | relative_url }}" data-i18n="home.latest.viewall">All posts →</a>
+
 </section>

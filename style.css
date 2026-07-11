@@ -334,7 +334,13 @@ section { scroll-margin-top: 6rem; }
 /* ============================================================
    6. Home sections / cards
    ============================================================ */
-.home-cv { display: none; }
+.home-cv { margin-top: var(--space-6); padding-top: var(--space-5); border-top: 1px solid var(--hairline-strong); }
+.home-cv h3 { margin-bottom: var(--space-4); font-size: var(--fs-600); font-weight: 650; }
+.cv-group h4 { margin-bottom: var(--space-3); color: var(--ink-faint); font-family: var(--font-mono); font-size: .72rem; letter-spacing: .04em; text-transform: uppercase; }
+.cv-list { display: grid; gap: 0; }
+.cv-item { display: grid; gap: .15rem; padding: .75rem 0; border-top: 1px solid var(--hairline); }
+.cv-item strong { font-weight: 620; }
+.cv-item span { color: var(--ink-muted); font-size: var(--fs-300); }
 .home-projects, .home-latest { margin-bottom: var(--space-5); }
 .project-preview-list {
   display: grid;
@@ -570,9 +576,19 @@ section { scroll-margin-top: 6rem; }
 }
 @media (max-width: 620px) {
   #main { padding-top: var(--space-6); }
-  .nav-links, .nav-toggles { width: 100%; justify-content: space-between; gap: .35rem; }
-  .nav-links a, .toggle-btn { padding-inline: .55rem; }
-  .hero-eyebrow { white-space: normal; }
+  .site-nav {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "brand toggles" "links links";
+    gap: .35rem .45rem;
+    padding: .35rem max(.5rem, env(safe-area-inset-right)) .35rem max(.5rem, env(safe-area-inset-left));
+  }
+  .nav-brand { grid-area: brand; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .nav-toggles { grid-area: toggles; justify-content: flex-end; }
+  .nav-links { grid-area: links; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; gap: .25rem; }
+  .nav-links li { min-width: 0; }
+  .nav-links a, .toggle-btn { min-height: 2.75rem; padding-inline: .45rem; white-space: nowrap; }
+  .nav-links a { width: 100%; }
   .profile-row { grid-template-columns: 1fr; gap: .2rem; }
   .post-nav { grid-template-columns: 1fr; }
   .site-footer { flex-direction: column; }
