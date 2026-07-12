@@ -10,21 +10,6 @@ title: "Blog"
     <p class="page-intro" data-i18n="blog.intro">Intro placeholder.</p>
   </header>
 
-  <!-- (b) 아이디어 맵: script.js가 posts-data를 읽어 점을 채운다 -->
-  <section class="idea-map-section reveal" aria-labelledby="map-h">
-    <h2 id="map-h" data-i18n="blog.map.heading">Idea map</h2>
-    <p class="map-disclaimer" data-i18n="blog.map.disclaimer">
-      This map is hand-placed, not an actual t-SNE result.
-    </p>
-    <!-- script.js가 이 컨테이너에 카테고리별 색의 점을 배치. 각 점은 post.url로 링크, 포커스 가능. -->
-    <div id="idea-map" class="idea-map" role="group" aria-label="Idea map of blog posts"></div>
-    <!-- 카테고리 범례 (라벨은 i18n, 색 훅은 data-cat) -->
-    <ul class="map-legend" aria-hidden="false">
-      <li><span class="legend-swatch" data-cat="interp"></span><span data-i18n="cat.interp">interpretability</span></li>
-      <li><span class="legend-swatch" data-cat="llm"></span><span data-i18n="cat.llm">LLM &amp; NLP</span></li>
-      <li><span class="legend-swatch" data-cat="build"></span><span data-i18n="cat.build">Agents &amp; tooling</span></li>
-    </ul>
-  </section>
 
   <!-- (a) 글 목록: SERVER-SIDE Liquid. 제목은 실제 post.url로 링크 (하드코딩 금지) -->
   <section class="post-list-section reveal" aria-labelledby="list-h">
@@ -36,16 +21,30 @@ title: "Blog"
       {% for post in site.posts %}
       <li class="post-list-item">
         <a class="post-list-link" href="{{ post.url | relative_url }}">
+          <span class="post-list-title">{{ post.title }}</span>
           <span class="post-list-meta">
             <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
             <span class="post-list-cat" data-cat="{{ post.cat }}" data-i18n="cat.{{ post.cat }}">{{ post.cat }}</span>
           </span>
-          <span class="post-list-title">{{ post.title }}</span>
         </a>
       </li>
       {% endfor %}
     </ul>
     {% endif %}
+  </section>
+
+  <!-- (b) 보조 주제 스케치: 목록 이후에 두며 탐색에 필수적이지 않다 -->
+  <section class="idea-map-section reveal" aria-labelledby="map-h">
+    <h2 id="map-h" data-i18n="blog.map.heading">Idea map</h2>
+    <p class="map-disclaimer" data-i18n="blog.map.disclaimer">
+      This map is hand-placed, not an actual t-SNE result.
+    </p>
+    <div id="idea-map" class="idea-map" role="group" aria-label="Idea map of blog posts"></div>
+    <ul class="map-legend" aria-hidden="false">
+      <li><span class="legend-swatch" data-cat="interp"></span><span data-i18n="cat.interp">interpretability</span></li>
+      <li><span class="legend-swatch" data-cat="llm"></span><span data-i18n="cat.llm">LLM &amp; NLP</span></li>
+      <li><span class="legend-swatch" data-cat="build"></span><span data-i18n="cat.build">Agents &amp; tooling</span></li>
+    </ul>
   </section>
 
   <!-- posts-data: 맵이 소비하는 단일 소스 -->

@@ -41,7 +41,7 @@
   --fs-700: clamp(1.45rem, 2.35vw, 2rem);
   --fs-600: 1.18rem;
   --fs-500: 1.03rem;
-  --fs-400: 1rem;
+  --fs-400: clamp(1rem, .97rem + .12vw, 1.075rem);
   --fs-300: .92rem;
   --fs-200: .78rem;
 
@@ -60,8 +60,8 @@
   --space-9: 6rem;
 
   --maxw: 780px;
-  --maxw-wide: 1080px;
-  --pad-x: clamp(1.1rem, 4.5vw, 2.8rem);
+  --maxw-wide: 1120px;
+  --pad-x: clamp(1.25rem, 5vw, 4rem);
   --radius: 8px;
   --radius-lg: 14px;
   --dur: 180ms;
@@ -98,8 +98,7 @@ html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 body {
   margin: 0;
   min-height: 100vh;
-  background:
-    linear-gradient(180deg, var(--bg), var(--bg-2) 54%, var(--bg));
+  background: var(--bg);
   color: var(--ink);
   font-family: var(--font-sans);
   font-size: var(--fs-400);
@@ -108,17 +107,7 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  pointer-events: none;
-  opacity: .45;
-  background-image: linear-gradient(var(--hairline) 1px, transparent 1px);
-  background-size: 100% 40px;
-  mask-image: linear-gradient(to bottom, black, transparent 72%);
-}
+body::before { display: none; }
 body::after { display: none; }
 
 h1, h2, h3, h4, p { margin-top: 0; }
@@ -163,7 +152,7 @@ img { max-width: 100%; height: auto; }
   letter-spacing: -.02em;
   font-size: 1rem;
 }
-.nav-brand::before { content: ""; display: inline-block; width: .48rem; height: .48rem; margin-right: .55rem; border-radius: 50%; background: var(--accent); vertical-align: .08rem; }
+.nav-brand::before { display: none; }
 .nav-links, .nav-toggles { display: flex; align-items: center; gap: .45rem; }
 .nav-links a, .toggle-btn {
   display: inline-flex; align-items: center; justify-content: center;
@@ -458,8 +447,9 @@ section { scroll-margin-top: 6rem; }
 .map-legend { display: flex; flex-wrap: wrap; gap: .65rem; color: var(--ink-muted); font-size: var(--fs-300); }
 .map-legend li { display: inline-flex; align-items: center; gap: .45rem; }
 .legend-swatch { width: .65rem; height: .65rem; border-radius: 50%; background: var(--cat-interp); display: inline-block; }
-[data-cat="llm"] { --dot-color: var(--cat-llm); }
-[data-cat="build"] { --dot-color: var(--cat-build); }
+.map-dot[data-cat="interp"] { --dot-color: var(--cat-interp); }
+.map-dot[data-cat="llm"] { --dot-color: var(--cat-llm); }
+.map-dot[data-cat="build"] { --dot-color: var(--cat-build); }
 .legend-swatch[data-cat="llm"] { background: var(--cat-llm); }
 .legend-swatch[data-cat="build"] { background: var(--cat-build); }
 .blog-empty { color: var(--ink-muted); }
@@ -680,4 +670,116 @@ body::before { display: none; }
 @media (max-width: 620px) {
   .education-row, .home-outputs { grid-template-columns: 1fr; }
   .home-section, .home-outputs { margin-top: var(--space-7); }
+}
+
+/* ============================================================
+   11. Balanced research index
+   Shared 8/4 structure and metadata rail across the main routes.
+   ============================================================ */
+.cover-head {
+  max-width: min(68ch, 66.666%);
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+.hero-eyebrow {
+  display: block;
+  width: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.hero-links { gap: 1.25rem; }
+.hero-link, .section-more {
+  min-height: 2.75rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--accent-ink);
+  text-decoration: underline;
+  transition: color var(--dur) var(--ease);
+}
+.hero-link:hover, .section-more:hover {
+  border-color: transparent;
+  background: transparent;
+  color: var(--ink);
+  text-decoration: underline;
+}
+.hero-link-accent, .hero-link-accent:hover {
+  border-color: transparent;
+  background: transparent;
+  color: var(--accent-ink);
+}
+.cover-grid {
+  grid-template-columns: minmax(0, 2fr) minmax(15rem, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  margin-top: clamp(3rem, 7vw, 5rem);
+}
+.home-projects { margin-top: clamp(4.5rem, 9vw, 7rem); }
+.home-latest {
+  margin-top: clamp(4rem, 8vw, 6rem);
+  margin-bottom: var(--space-8);
+}
+.project-preview-row,
+.latest-link,
+.post-list-link {
+  grid-template-columns: minmax(0, 2fr) minmax(14rem, 1fr);
+  padding-top: clamp(1.1rem, 2vw, 1.5rem);
+  padding-bottom: clamp(1.1rem, 2vw, 1.5rem);
+}
+.latest-list, .post-list {
+  gap: 0;
+  border-top: 1px solid var(--hairline);
+}
+.latest-meta, .post-list-meta { justify-content: flex-start; }
+.projects-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 1px solid var(--hairline);
+}
+.projects-list .project-card,
+.projects-list .project-card:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(14rem, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  grid-column: auto;
+  min-height: 0;
+  padding: clamp(1.2rem, 2.4vw, 1.65rem) 0;
+  border: 0;
+  border-bottom: 1px solid var(--hairline);
+  border-radius: 0;
+  background: transparent;
+  overflow: visible;
+}
+.projects-list .project-card:hover { background: transparent; }
+.projects-list .project-card-meta { text-align: left; }
+.projects-list .project-card-desc { max-width: 68ch; }
+.post-list-section { margin-bottom: clamp(4rem, 8vw, 6rem); }
+.idea-map-section { box-shadow: none; }
+.idea-map {
+  background:
+    radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 22rem),
+    var(--surface-strong);
+}
+.map-dot {
+  background: var(--dot-color, var(--accent));
+  box-shadow: 0 0 0 .3rem color-mix(in srgb, var(--dot-color, var(--accent)) 16%, transparent);
+}
+
+@media (max-width: 900px) {
+  .projects-list .project-card,
+  .projects-list .project-card:first-child { grid-template-columns: 1fr; gap: .65rem; }
+}
+@media (max-width: 720px) {
+  .cover-head { max-width: 100%; }
+  .cover-grid {
+    grid-template-columns: 1fr;
+    gap: clamp(2.5rem, 10vw, 3rem);
+  }
+  .project-preview-row,
+  .latest-link,
+  .post-list-link { grid-template-columns: 1fr; gap: .35rem; }
+  .project-preview-row .project-card-meta { text-align: left; }
 }
