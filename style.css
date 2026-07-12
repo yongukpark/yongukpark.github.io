@@ -35,7 +35,7 @@
   --font-mono: "IBM Plex Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --font-display: var(--font-sans);
 
-  --fs-950: clamp(2.15rem, 4.2vw, 3.65rem);
+  --fs-950: clamp(1.9rem, 3vw, 2.75rem);
   --fs-900: clamp(2.25rem, 4.7vw, 4.1rem);
   --fs-800: clamp(1.9rem, 3.6vw, 3rem);
   --fs-700: clamp(1.45rem, 2.35vw, 2rem);
@@ -619,4 +619,60 @@ body::before { display: none; }
   .cover-grid { grid-template-columns: 1fr; gap: var(--space-6); }
   .home-projects { margin-top: var(--space-7); }
   .home-projects, .home-latest { margin-bottom: var(--space-7); }
+}
+
+/* Homepage microdirection: typography and records instead of preview cards. */
+.home-index { padding-bottom: var(--space-9); }
+.home-identity {
+  max-width: var(--maxw);
+  padding-bottom: var(--space-7);
+  border-bottom: 1px solid var(--hairline);
+}
+.home-identity h1 {
+  max-width: 14ch;
+  margin: 0 0 var(--space-3);
+  font-size: var(--fs-950);
+  line-height: 1.1;
+  font-weight: 650;
+  letter-spacing: -.04em;
+}
+.home-identity .intro-bio {
+  max-width: 46rem;
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: clamp(1rem, 1.25vw, 1.125rem);
+  line-height: 1.7;
+}
+.home-section { max-width: var(--maxw); margin-top: var(--space-8); }
+.home-section h2, .home-outputs h2 {
+  margin-bottom: var(--space-5);
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  font-weight: 650;
+}
+.home-list, .home-index .interests-list { border-top: 1px solid var(--hairline); }
+.home-index .interests-list { gap: 0; }
+.home-index .interests-list li {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--hairline);
+  overflow-wrap: anywhere;
+}
+.home-row {
+  display: grid;
+  gap: .2rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--hairline);
+  overflow-wrap: anywhere;
+}
+.home-row strong { font-weight: 620; }
+.home-row span { color: var(--ink-muted); font-size: var(--fs-300); }
+.education-row { grid-template-columns: minmax(8rem, 11rem) minmax(0, 1fr); }
+.home-outputs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(2.5rem, 6vw, 4rem);
+  margin-top: var(--space-8);
+}
+@media (max-width: 620px) {
+  .education-row, .home-outputs { grid-template-columns: 1fr; }
+  .home-section, .home-outputs { margin-top: var(--space-7); }
 }

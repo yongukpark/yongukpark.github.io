@@ -41,9 +41,12 @@
     // categories
     "cat.interp", "cat.llm", "cat.build",
     // home
-    "home.intro.name",
+    "home.intro.name", "home.intro.bio",
     "home.interests.heading", "home.interests.item1", "home.interests.item2", "home.interests.item3",
-    "home.projects.heading", "home.latest.heading",
+    "home.education.heading", "home.education.period", "home.education.institution",
+    "home.education.lab", "home.education.program", "home.awards.heading",
+    "home.patents.heading", "home.patents.title", "home.patents.meta",
+    "home.software.heading", "home.software.name", "home.software.purpose", "home.software.meta",
     "home.connect.heading", "home.connect.github", "home.connect.email",
     // projects
     "projects.heading", "projects.intro",
@@ -108,6 +111,9 @@
         return; // keep placeholder text
       }
       el.textContent = val; // NOTE: this destroys any word-reveal spans inside
+      if (el.hasAttribute("data-hide-when-empty")) {
+        el.hidden = val.trim() === "";
+      }
 
       // Interface guard (redesign §5): a [data-word-reveal] headline just had its
       // word spans wiped by the textContent swap. If the reveal system is already
