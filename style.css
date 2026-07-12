@@ -666,12 +666,17 @@ body::before { display: none; }
 .home-row strong { font-weight: 620; }
 .home-row span { color: var(--ink-muted); font-size: var(--fs-300); }
 .education-row { grid-template-columns: minmax(8rem, 11rem) minmax(0, 1fr); }
+.education-details { display: grid; gap: .2rem; min-width: 0; }
+.education-details strong { color: var(--ink); }
+.author-slot { overflow-wrap: anywhere; }
+.author-slot strong, .author-slot > span:first-child { color: var(--ink-muted); }
 .home-outputs {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(2.5rem, 6vw, 4rem);
   margin-top: var(--space-8);
 }
+.home-outputs > section { min-width: 0; }
 @media (max-width: 620px) {
   .education-row, .home-outputs { grid-template-columns: 1fr; }
   .home-section, .home-outputs { margin-top: var(--space-7); }

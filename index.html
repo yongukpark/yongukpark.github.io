@@ -3,12 +3,11 @@ layout: default
 permalink: /
 title: null
 ---
-<!-- content-author: 문구는 i18n.js에서 편집한다. 확인되지 않은 약력 데이터는 렌더링하지 않는다. -->
+<!-- content-author: 표시 문구와 빈 슬롯은 i18n.js에서 편집한다. -->
 <div class="home-index">
   <header class="home-identity">
     <h1 id="intro-name" data-word-reveal data-i18n="home.intro.name">Yonguk Park</h1>
-    <!-- content-author: home.intro.bio에 사실 확인된 1–2문장을 입력하면 script.js가 표시한다. -->
-    <p class="intro-bio" data-i18n="home.intro.bio" data-hide-when-empty hidden></p>
+    <p class="intro-bio author-slot" data-i18n="home.intro.bio">Add a short introduction here.</p>
   </header>
 
   <section class="home-section home-interests reveal" aria-labelledby="interests-h">
@@ -20,8 +19,20 @@ title: null
     </ul>
   </section>
 
-  <!-- content-author: Education은 home.education.* (period, institution, lab, program)에
-       검증된 값을 입력한 뒤 .education-row 구조로 이 위치에 렌더링한다. -->
+  <section class="home-section home-education reveal" aria-labelledby="education-h">
+    <h2 id="education-h" data-i18n="home.education.heading">Education</h2>
+    <ul class="home-list">
+      <li class="home-row education-row author-slot">
+        <span data-i18n="home.education.period">[Period]</span>
+        <span class="education-details">
+          <strong data-i18n="home.education.institution">[Institution]</strong>
+          <span data-i18n="home.education.lab">[Lab]</span>
+          <span data-i18n="home.education.program">[Program, optional]</span>
+        </span>
+      </li>
+    </ul>
+  </section>
+
   <section class="home-section home-awards reveal" aria-labelledby="awards-h">
     <h2 id="awards-h" data-i18n="home.awards.heading">Awards</h2>
     <ul class="home-list">
@@ -30,10 +41,21 @@ title: null
     </ul>
   </section>
 
-  <!-- content-author: home.outputs — 검증된 항목이 생기면 아래 모양으로 추가한다.
   <div class="home-outputs">
-    <section aria-labelledby="patents-h"><h2 id="patents-h" data-i18n="home.patents.heading">Patents</h2></section>
-    <section aria-labelledby="software-h"><h2 id="software-h" data-i18n="home.software.heading">Software</h2></section>
+    <section class="reveal" aria-labelledby="patents-h">
+      <h2 id="patents-h" data-i18n="home.patents.heading">Patents</h2>
+      <div class="home-row author-slot">
+        <strong data-i18n="home.patents.title">Add patent information here.</strong>
+        <span data-i18n="home.patents.meta">[Application or registration details, optional]</span>
+      </div>
+    </section>
+    <section class="reveal" aria-labelledby="software-h">
+      <h2 id="software-h" data-i18n="home.software.heading">Software</h2>
+      <div class="home-row author-slot">
+        <strong data-i18n="home.software.name">Add software information here.</strong>
+        <span data-i18n="home.software.purpose">[Purpose, optional]</span>
+        <span data-i18n="home.software.meta">[Link or release details, optional]</span>
+      </div>
+    </section>
   </div>
-  Patent는 home.patents.title/meta, Software는 home.software.name/purpose/meta 키를 사용한다. -->
 </div>
