@@ -37,7 +37,8 @@
     "a11y.skip", "footer.github", "footer.email", "footer.copyright",
     // nav
     "nav.brand", "nav.home", "nav.projects", "nav.blog",
-    "nav.theme.label", "nav.theme.aria", "nav.lang.label", "nav.lang.aria",
+    "nav.theme.label", "nav.theme.aria.toDark", "nav.theme.aria.toLight",
+    "nav.lang.label", "nav.lang.aria",
     // categories
     "cat.interp", "cat.llm", "cat.build",
     // home
@@ -55,6 +56,7 @@
     "project.3.title", "project.3.meta", "project.3.desc",
     "project.4.title", "project.4.meta", "project.4.desc",
     "project.5.title", "project.5.meta", "project.5.desc",
+    "project.links.aria", "project.link.demo", "project.link.repository", "project.link.paper", "project.link.details",
     // blog
     "blog.heading", "blog.intro", "blog.map.heading", "blog.map.disclaimer",
     "blog.list.heading", "blog.empty",
@@ -136,6 +138,11 @@
     });
 
     document.documentElement.setAttribute("lang", lang);
+
+    // The theme control describes its next action, so its accessible name
+    // depends on both the active language and the current theme.
+    var themeBtn = document.getElementById("theme-toggle");
+    if (themeBtn) reflectThemeButton(themeBtn, currentTheme(), lang);
   }
 
   // One-time self-check: warn about any inventory key absent from the dict.
@@ -173,19 +180,25 @@
       : "light";
   }
 
-  function reflectThemeButton(btn, theme) {
+  function reflectThemeButton(btn, theme, lang) {
     btn.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+    var dict = getDict(lang || getLang());
+    var ariaKey = theme === "dark"
+      ? "nav.theme.aria.toLight"
+      : "nav.theme.aria.toDark";
+    var aria = t(dict, ariaKey);
+    if (aria !== null) btn.setAttribute("aria-label", aria);
   }
 
   function initThemeToggle() {
     var btn = document.getElementById("theme-toggle");
     if (!btn) return;
-    reflectThemeButton(btn, currentTheme());
+    reflectThemeButton(btn, currentTheme(), getLang());
     btn.addEventListener("click", function () {
       var next = currentTheme() === "dark" ? "light" : "dark";
       document.documentElement.setAttribute("data-theme", next);
       try { localStorage.setItem(STORAGE_THEME, next); } catch (e) {}
-      reflectThemeButton(btn, next);
+      reflectThemeButton(btn, next, getLang());
     });
   }
 

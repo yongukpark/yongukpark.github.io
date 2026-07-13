@@ -1,0 +1,23 @@
+{% assign project = include.project %}
+<li class="project-card reveal">
+  <div class="project-card-main">
+    <h2 class="project-card-title" data-i18n="project.{{ project.id }}.title">Project {{ project.id }}</h2>
+    <p class="project-card-desc" data-i18n="project.{{ project.id }}.desc">Description placeholder.</p>
+    {% if project.links and project.links != empty %}
+    <ul class="project-links" aria-label="Project links" data-i18n-aria="project.links.aria">
+      {% assign link_types = "demo,repository,paper,details" | split: "," %}
+      {% for link_type in link_types %}
+        {% assign links_of_type = project.links | where: "type", link_type %}
+        {% for link in links_of_type %}
+        <li>
+          <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer"{% if link.aria_key %} data-i18n-aria="{{ link.aria_key }}"{% endif %}>
+            <span data-i18n="project.link.{{ link.type }}">{{ link.type }}</span>
+          </a>
+        </li>
+        {% endfor %}
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+  <p class="project-card-meta" data-i18n="project.{{ project.id }}.meta">Meta</p>
+</li>

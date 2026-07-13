@@ -1,0 +1,13 @@
+# Display order is the file order. External links are optional and render only
+# when a verified URL is present. Allowed link types: demo, repository, paper,
+# details (rendered in that order by _includes/project-card.html).
+- id: 1
+  links: []
+- id: 2
+  links: []
+- id: 3
+  links: []
+- id: 4
+  links: []
+- id: 5
+  links: []

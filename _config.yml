@@ -55,4 +55,5 @@ exclude:
   - CLAUDE.md
   - _workspace
   - vendor
+  - tests
   - .claude

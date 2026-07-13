@@ -21,9 +21,10 @@ window.I18N = {
     "nav.projects": "프로젝트",
     "nav.blog": "블로그",
     "nav.theme.label": "테마",
-    "nav.theme.aria": "밝은/어두운 테마 전환",
+    "nav.theme.aria.toDark": "어두운 테마로 전환",
+    "nav.theme.aria.toLight": "밝은 테마로 전환",
     "nav.lang.label": "EN",
-    "nav.lang.aria": "English로 전환",
+    "nav.lang.aria": "Switch to English",
 
     /* category labels (contract §4) */
     "cat.interp": "기계적 해석가능성",
@@ -42,7 +43,7 @@ window.I18N = {
     "home.avatar.metric2.label": "agents",
     "home.avatar.metric3.value": "MI",
     "home.avatar.metric3.label": "circuits",
-    "home.interests.heading": "연구 관심사",
+    "home.interests.heading": "요즘 관심 있는 것",
     "home.interests.item1": "Mechanistic interpretability — attention head와 circuit이 어떤 계산을 맡는지 추적하기",
     "home.interests.item2": "LLM 및 NLP — 생성 텍스트를 분석하고, 모델의 흔적을 더 정직하게 구분하기",
     "home.interests.item3": "AI Agent와 도구 개발 — MCP처럼 외부 도구를 다루는 에이전트를 직접 만들고 평가하기",
@@ -71,9 +72,12 @@ window.I18N = {
     "profile.github.dt": "GitHub",
     "profile.email.dt": "이메일",
 
-    /* CV — 검증된 항목이 없는 하위 섹션은 마크업에서 렌더링하지 않는다. */
+    /* CV — 학교와 연구실을 한 항목으로 관리하고, 검증되지 않은 하위 섹션은 렌더링하지 않는다. */
     "home.cv.heading": "이력",
-    "cv.edu.heading": "학력",
+    "cv.edu.heading": "학교와 연구실",
+    "cv.edu.1.period": "재학 기간: TODO",
+    "cv.edu.1.title": "학교 · 전공/학위: TODO",
+    "cv.edu.1.desc": "연구실: KAIST SAIL",
     "cv.gpa.heading": "학점",
     "cv.awards.heading": "수상",
     "cv.awards.1.title": "대상",
@@ -83,7 +87,7 @@ window.I18N = {
     "cv.publications.heading": "논문",
 
     /* section labels (mono eyebrow — 재량으로 영문 유지) */
-    "label.interests": "Research",
+    "label.interests": "Interests",
     "label.cv": "Curriculum",
     "label.projects": "Projects",
     "label.latest": "Writing",
@@ -93,6 +97,11 @@ window.I18N = {
     /* projects (순서 고정) */
     "projects.heading": "프로젝트",
     "projects.intro": "연구와 개발 작업을 mechanistic interpretability를 중심으로 정리했습니다.",
+    "project.links.aria": "프로젝트 외부 링크",
+    "project.link.demo": "데모",
+    "project.link.repository": "저장소",
+    "project.link.paper": "논문",
+    "project.link.details": "자세히",
 
     "project.1.title": "Attention head 수준의 mechanistic interpretability",
     "project.1.meta": "KAIST SAIL · 연구 진행 중 · Transformer 내부 분석",
@@ -147,9 +156,10 @@ window.I18N = {
     "nav.projects": "Projects",
     "nav.blog": "Blog",
     "nav.theme.label": "Theme",
-    "nav.theme.aria": "Toggle light/dark theme",
+    "nav.theme.aria.toDark": "Switch to dark theme",
+    "nav.theme.aria.toLight": "Switch to light theme",
     "nav.lang.label": "한국어",
-    "nav.lang.aria": "Switch to Korean",
+    "nav.lang.aria": "한국어로 전환",
 
     /* category labels (contract §4) */
     "cat.interp": "mechanistic interpretability",
@@ -168,7 +178,7 @@ window.I18N = {
     "home.avatar.metric2.label": "agents",
     "home.avatar.metric3.value": "MI",
     "home.avatar.metric3.label": "circuits",
-    "home.interests.heading": "Questions I keep returning to",
+    "home.interests.heading": "What I'm interested in",
     "home.interests.item1": "Mechanistic interpretability — tracing what attention heads and circuits are actually computing",
     "home.interests.item2": "LLM & NLP — analyzing generated text and separating model traces more honestly",
     "home.interests.item3": "AI agents & tooling — building and evaluating tool-using agents, including MCP-based systems",
@@ -197,9 +207,12 @@ window.I18N = {
     "profile.github.dt": "GitHub",
     "profile.email.dt": "Email",
 
-    /* CV — subsections without verified entries are omitted from the markup. */
+    /* CV — keep school and lab in one entry; omit unverified subsections from the markup. */
     "home.cv.heading": "CV",
-    "cv.edu.heading": "Education",
+    "cv.edu.heading": "Education & labs",
+    "cv.edu.1.period": "Dates attended: TODO",
+    "cv.edu.1.title": "School · major/degree: TODO",
+    "cv.edu.1.desc": "Lab: KAIST SAIL",
     "cv.gpa.heading": "GPA",
     "cv.awards.heading": "Awards",
     "cv.awards.1.title": "Grand Prize",
@@ -209,7 +222,7 @@ window.I18N = {
     "cv.publications.heading": "Publications",
 
     /* section labels (mono eyebrow) */
-    "label.interests": "Research",
+    "label.interests": "Interests",
     "label.cv": "Curriculum",
     "label.projects": "Projects",
     "label.latest": "Writing",
@@ -219,6 +232,11 @@ window.I18N = {
     /* projects (fixed order) */
     "projects.heading": "Projects",
     "projects.intro": "Selected research and development work, centered on mechanistic interpretability.",
+    "project.links.aria": "External project links",
+    "project.link.demo": "Demo",
+    "project.link.repository": "Repository",
+    "project.link.paper": "Paper",
+    "project.link.details": "Details",
 
     "project.1.title": "Attention-head mechanistic interpretability",
     "project.1.meta": "KAIST SAIL · ongoing research · Transformer internals",
