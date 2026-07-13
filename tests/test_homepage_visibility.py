@@ -47,43 +47,49 @@ class HomepageVisibilityTest(unittest.TestCase):
     def test_required_home_content_is_rendered_not_hidden_or_commented(self):
         required = {
             "home.intro.bio",
-            "home.education.heading",
-            "home.education.period",
-            "home.education.institution",
-            "home.education.lab",
-            "home.patents.heading",
-            "home.patents.title",
-            "home.software.heading",
-            "home.software.name",
+            "cv.edu.heading",
+            "cv.edu.1.period",
+            "cv.edu.1.title",
+            "cv.edu.1.desc",
         }
         self.assertEqual(set(), required - self.parser.keys.keys())
         for key in required:
             self.assertNotIn("hidden", self.parser.keys[key]["attrs"], key)
             self.assertNotIn("data-hide-when-empty", self.parser.keys[key]["attrs"], key)
 
+    def test_patent_and_software_are_absent_from_home_and_i18n(self):
+        forbidden_prefixes = ("home.patents.", "home.software.")
+        self.assertFalse(
+            any(key.startswith(forbidden_prefixes) for key in self.parser.keys),
+            "Patent/Software i18n keys must not be rendered on Home",
+        )
+        dictionary_keys = set(re.findall(r'"([^"]+)"\s*:', self.i18n))
+        self.assertFalse(
+            any(key.startswith(forbidden_prefixes) for key in dictionary_keys),
+            "Patent/Software keys must not remain in the dictionaries",
+        )
+
     def test_home_section_order_and_no_project_or_blog_body_sections(self):
         headings = re.findall(r'<h2[^>]+data-i18n="([^"]+)"', self.index)
         self.assertEqual(
             [
                 "home.interests.heading",
-                "home.education.heading",
+                "cv.edu.heading",
                 "home.awards.heading",
-                "home.patents.heading",
-                "home.software.heading",
             ],
             headings,
         )
         self.assertNotRegex(self.index, r'class="[^"]*home-(?:projects|latest|blog)')
 
-    def test_output_grid_is_two_columns_and_stacks_at_620px(self):
+    def test_school_and_lab_row_is_two_columns_and_stacks_at_620px(self):
         self.assertRegex(
             self.css,
-            r"\.home-outputs\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)",
+            r"\.education-row\s*\{[^}]*grid-template-columns:\s*minmax\(8rem,\s*11rem\)\s+minmax\(0,\s*1fr\)",
         )
         mobile_blocks = re.findall(r"@media\s*\(max-width:\s*620px\)\s*\{(.*?)\n\}", self.css, re.S)
         if not mobile_blocks:
             self.fail("missing 620px media query")
-        self.assertRegex("\n".join(mobile_blocks), r"\.home-outputs\s*\{[^}]*grid-template-columns:\s*1fr")
+        self.assertRegex("\n".join(mobile_blocks), r"\.education-row[^}]*\{[^}]*grid-template-columns:\s*1fr")
 
     def test_ko_and_en_have_matching_nonempty_author_placeholders(self):
         blocks = re.findall(r"^  (?:ko|en):\s*\{(.*?)^  \}", self.i18n, re.S | re.M)
@@ -92,11 +98,9 @@ class HomepageVisibilityTest(unittest.TestCase):
         self.assertEqual(key_sets[0], key_sets[1])
         author_keys = {
             "home.intro.bio",
-            "home.education.period",
-            "home.education.institution",
-            "home.education.lab",
-            "home.patents.title",
-            "home.software.name",
+            "cv.edu.1.period",
+            "cv.edu.1.title",
+            "cv.edu.1.desc",
         }
         for block in blocks:
             values = dict(re.findall(r'"([^"]+)"\s*:\s*"([^"]*)"', block))
@@ -110,16 +114,21 @@ class HomepageVisibilityTest(unittest.TestCase):
         parser.feed(built.read_text(encoding="utf-8"))
         for key in (
             "home.intro.bio",
-            "home.education.heading",
-            "home.education.institution",
-            "home.patents.heading",
-            "home.patents.title",
-            "home.software.heading",
-            "home.software.name",
+            "cv.edu.heading",
+            "cv.edu.1.period",
+            "cv.edu.1.title",
+            "cv.edu.1.desc",
         ):
             self.assertIn(key, parser.keys)
             self.assertNotIn("hidden", parser.keys[key]["attrs"], key)
             self.assertTrue("".join(parser.keys[key]["text"]).strip(), key)
+        self.assertFalse(
+            any(
+                key.startswith(("home.patents.", "home.software."))
+                for key in parser.keys
+            ),
+            "built Home must not expose Patent/Software placeholders",
+        )
 
 
 if __name__ == "__main__":
